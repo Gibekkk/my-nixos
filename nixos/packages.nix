@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, pkgs-unstable, ... }: {
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -49,6 +49,7 @@
     fd
     bat
     vim
+    pkgs-unstable.fzf
 
     # GUI utils
     feh

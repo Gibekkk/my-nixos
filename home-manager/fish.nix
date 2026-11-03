@@ -15,12 +15,10 @@ in {
       echo "Welcome back, $USER" | lolcat
     '';
     plugins = [
-      { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
       { name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
     ];
   };
 
   programs.starship.enable = true;
-  programs.fzf.enable = true;
-  home.packages = with pkgs; [ fzf fd bat ];
+  home.packages = with pkgs; [ fd bat ];
 }
