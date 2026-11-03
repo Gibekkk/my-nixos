@@ -6,8 +6,8 @@
     ./alacritty.nix
     ./qt.nix
 
-    ./wms/hyprland.nix
-    ./wms/caelestia.nix
+    #./wms/hyprland.nix
+    #./wms/caelestia.nix
     #./wms/waybar.nix
   ];
 }

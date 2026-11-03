@@ -8,6 +8,7 @@
 
   disabledModules = [
     ./modules/xserver.nix
+    ./modules/hyprland.nix
   ];
 
   networking.hostName = "Gibekkk"; # Define your hostname.

@@ -4,7 +4,7 @@
   environment.systemPackages = with pkgs; [
     # Desktop apps
     telegram-desktop
-    alacritty
+    #alacritty
     rofi
     wofi
     mpv
@@ -49,7 +49,7 @@
     fd
     bat
     vim
-    pkgs-unstable.fzf
+    fzf
 
     # GUI utils
     feh
@@ -58,9 +58,9 @@
     pavucontrol
 
     # Wayland
-    wl-clipboard
+    #wl-clipboard
     cliphist
-    hyprpaper
+    #hyprpaper
 
     # Sound
     pamixer

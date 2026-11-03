@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   services.greetd = {
-    enable = true;
+    enable = false;
     useTextGreeter = true;   # stops boot logs painting over greeter
     settings.default_session = {
       user = "greeter";
