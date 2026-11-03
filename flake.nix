@@ -1,46 +1,44 @@
 {
-  description = "My system configuration";
+  description = "Gibekkk's NixOS";
 
   inputs = {
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
+    
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    polymc.url = "github:PolyMC/PolyMC";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nix-flatpak, ... }@inputs:
 
     let
       system = "x86_64-linux";
     in {
 
-    # nixos - system hostname
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    # Gibekkk - system hostname
+    nixosConfigurations.Gibekkk = nixpkgs.lib.nixosSystem {
       specialArgs = {
         pkgs-stable = import nixpkgs-stable {
           inherit system;
-          config.allowUnfree = true;
         };
         inherit inputs system;
       };
       modules = [
+        nix-flatpak.nixosModules.nix-flatpak
         ./nixos/configuration.nix
-        inputs.nixvim.nixosModules.nixvim
       ];
     };
 
-    homeConfigurations.amper = home-manager.lib.homeManagerConfiguration {
+    # gibekkk - username
+    homeConfigurations.gibekkk = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
       modules = [ ./home-manager/home.nix ];
     };

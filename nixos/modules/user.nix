@@ -1,17 +1,17 @@
 { pkgs, ... }: {
-  programs.zsh.enable = true;
+  programs.fish.enable = true;
 
   users = {
-    defaultUserShell = pkgs.zsh;
+    defaultUserShell = pkgs.fish;
 
-    users.amper = {
+    users.gibekkk = {
       isNormalUser = true;
-      description = "Ampersand";
+      description = "Gilbert Winardy";
       extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
       packages = with pkgs; [];
     };
   };
 
   # Enable automatic login for the user.
-  services.getty.autologinUser = "amper";
+  services.getty.autologinUser = "gibekkk";
 }

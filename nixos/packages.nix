@@ -1,26 +1,25 @@
 { pkgs, ... }: {
   nixpkgs.config = {
-    allowUnfree = true;
     permittedInsecurePackages = ["python-2.7.18.8" "electron-25.9.0"];
   };
 
   environment.systemPackages = with pkgs; [
     # Desktop apps
-    audacity
-    chromium
+    #audacity
+    #chromium
     telegram-desktop
     alacritty
-    obs-studio
+    #obs-studio
     rofi
     wofi
     mpv
     kdenlive
-    discord
+    #discord
     gparted
     obsidian
     zoom-us
     pcmanfm-qt
-    polymc
+    firefox
 
     # Coding stuff
     gnumake
@@ -30,13 +29,13 @@
     (python3.withPackages (ps: with ps; [ requests ]))
 
     # CLI utils
-    neofetch
+    fastfetch
     file
     tree
     wget
     git
-    fastfetch
-    htop
+    gh
+    btop
     nix-index
     unzip
     scrot
@@ -54,6 +53,7 @@
     swww
     openssl
     lazygit
+    lolcat
     bluez
     bluez-tools
 
@@ -61,9 +61,9 @@
     feh
     imv
     dmenu
-    screenkey
+    #screenkey
     mako
-    gromit-mpx
+    #gromit-mpx
 
     # Xorg stuff
     #xterm
@@ -92,6 +92,7 @@
     amdvlk
     rocm-opencl-icd
     glaxnimate
+    radeontop
 
     # Screenshotting
     grim

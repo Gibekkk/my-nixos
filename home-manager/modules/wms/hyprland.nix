@@ -14,7 +14,7 @@
         "XDG_SESSION_DESKTOP,Hyprland"
         "XCURSOR_SIZE,36"
         "QT_QPA_PLATFORM,wayland"
-        "XDG_SCREENSHOTS_DIR,~/screens"
+        "XDG_SCREENSHOTS_DIR,~/Screenshots"
       ];
 
       debug = {

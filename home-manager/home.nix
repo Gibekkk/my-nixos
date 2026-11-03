@@ -1,13 +1,13 @@
 {
 
   imports = [
-    ./zsh.nix
+    ./fish.nix
     ./modules/bundle.nix
   ];
 
   home = {
-    username = "amper";
-    homeDirectory = "/home/amper";
-    stateVersion = "23.11";
+    username = "gibekkk";
+    homeDirectory = "/home/gibekkk";
+    stateVersion = "26.05";
   };
 }
