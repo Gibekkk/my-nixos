@@ -79,6 +79,9 @@
     home-manager
     spice-vdagent
     papirus-nord
+
+    # Games
+    steam
   ];
 
   hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
