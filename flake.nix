@@ -23,6 +23,12 @@
     zapfast = {
       url = "github:crmne/zapfast";
     };
+
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, ... }@inputs:
@@ -50,7 +56,10 @@
     homeConfigurations.gibekkk = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
       extraSpecialArgs = { inherit inputs; };
-      modules = [ ./home-manager/home.nix ];
+      modules = [
+      inputs.plasma-manager.homeModules.plasma-manager
+      ./home-manager/home.nix
+      ];
     };
   };
 }

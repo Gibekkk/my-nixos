@@ -5,6 +5,7 @@
     ./htop.nix
     ./alacritty.nix
     ./zapfast.nix
+    ./plasma.nix
     #./qt.nix
 
     #./wms/hyprland.nix
