@@ -25,7 +25,7 @@
     # Gibekkk - system hostname
     nixosConfigurations.Gibekkk = nixpkgs.lib.nixosSystem {
       specialArgs = {
-        pkgs-stable = import nixpkgs-stable {
+        pkgs-unstable = import nixpkgs-unstable {
           inherit system;
         };
         inherit inputs system;
