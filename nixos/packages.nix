@@ -10,6 +10,7 @@
     mpv
     kdePackages.kdenlive
     kdePackages.dolphin
+    kdePackages.konsole
     gparted
     obsidian
     zoom-us
@@ -47,6 +48,7 @@
     fzf
     fd
     bat
+    vim
 
     # GUI utils
     feh
