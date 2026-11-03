@@ -15,5 +15,6 @@
     ./tailscale.nix
     ./neovim.nix
     ./greetd.nix
+    ./xdg.nix
   ];
 }
