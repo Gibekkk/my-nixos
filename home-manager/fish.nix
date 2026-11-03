@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
   flakeDir = "${config.home.homeDirectory}/nix";
 in {
@@ -29,8 +29,6 @@ in {
       echo "Welcome back, $USER" | lolcat
     '';
     
-    home.packages = with pkgs; [ lolcat fzf fd bat ];
-
     # Optional extras
     plugins = [
       { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
