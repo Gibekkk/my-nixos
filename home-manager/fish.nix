@@ -28,12 +28,6 @@ in {
     programs.fish.functions.fish_greeting = ''
       echo "Welcome back, $USER" | lolcat
     '';
-    
-    # Optional extras
-    plugins = [
-      { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
-      { name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
-    ];
   };
 
   # Replaces agnoster theme
