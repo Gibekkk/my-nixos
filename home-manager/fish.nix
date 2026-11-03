@@ -25,7 +25,7 @@ in {
     #  gd = "git diff";
     #};
 
-    programs.fish.functions.fish_greeting = ''
+    functions.fish_greeting = ''
       echo "Welcome back, $USER" | lolcat
     '';
   };
