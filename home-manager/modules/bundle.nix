@@ -4,6 +4,7 @@
     ./git.nix
     ./htop.nix
     ./alacritty.nix
+    ./zapfast.nix
     #./qt.nix
 
     #./wms/hyprland.nix
