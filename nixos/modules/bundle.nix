@@ -2,6 +2,7 @@
   imports = [
     ./bootloader.nix
     ./sound.nix
+    ./avahi.nix
     ./zram.nix
     ./env.nix
     ./user.nix
@@ -12,5 +13,7 @@
     ./trim.nix
     ./bluetooth.nix
     ./tailscale.nix
+    ./neovim.nix
+    ./greetd.nix
   ];
 }

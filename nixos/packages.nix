@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   nixpkgs.config = {
-    permittedInsecurePackages = ["python-2.7.18.8" "electron-25.9.0"];
+    allowUnfree = true;
+    #permittedInsecurePackages = ["python-2.7.18.8" "electron-25.9.0"];
   };
 
   environment.systemPackages = with pkgs; [
@@ -25,10 +26,10 @@
     gnumake
     gcc
     nodejs
-    python
     (python3.withPackages (ps: with ps; [ requests ]))
 
     # CLI utils
+    nvim
     fastfetch
     file
     tree
@@ -40,8 +41,6 @@
     unzip
     scrot
     ffmpeg
-    light
-    lux
     mediainfo
     ranger
     zram-generator
@@ -89,8 +88,6 @@
     pamixer
 
     # GPU stuff 
-    amdvlk
-    rocm-opencl-icd
     glaxnimate
     radeontop
 
@@ -107,16 +104,5 @@
     libsForQt5.qtstyleplugin-kvantum
     libsForQt5.qt5ct
     papirus-nord
-  ];
-
-  fonts.packages = with pkgs; [
-    jetbrains-mono
-    noto-fonts
-    noto-fonts-emoji
-    twemoji-color-font
-    font-awesome
-    powerline-fonts
-    powerline-symbols
-    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
   ];
 }

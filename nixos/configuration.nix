@@ -10,7 +10,7 @@
     ./modules/xserver.nix
   ];
 
-  networking.hostName = "Gibekkk-PC"; # Define your hostname.
+  networking.hostName = "Gibekkk"; # Define your hostname.
   
   networking.extraHosts = ''
     100.64.0.10 nas
