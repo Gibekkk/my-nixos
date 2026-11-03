@@ -4,7 +4,7 @@
     ./git.nix
     ./htop.nix
     ./alacritty.nix
-    ./qt.nix
+    #./qt.nix
 
     #./wms/hyprland.nix
     #./wms/caelestia.nix

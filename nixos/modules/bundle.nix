@@ -6,15 +6,16 @@
     ./zram.nix
     ./env.nix
     ./user.nix
-    ./xserver.nix
+    #./xserver.nix
     ./nm.nix
     ./virtmanager.nix
-    ./hyprland.nix
+    #./hyprland.nix
     ./trim.nix
     ./bluetooth.nix
     ./tailscale.nix
     ./neovim.nix
-    ./greetd.nix
+    #./greetd.nix
     ./xdg.nix
+    ./plasma.nix
   ];
 }
