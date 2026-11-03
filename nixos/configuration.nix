@@ -9,8 +9,10 @@
   networking.hostName = "Gibekkk"; # Define your hostname.
   
   networking.extraHosts = ''
-    100.64.0.10 nas
-    100.64.0.11 server
+    100.105.193.52 bobian
+    100.116.34.120 imt_ucm
+    100.118.106.119 server-alim
+    100.84.145.118 syariati
   '';
 
   time.timeZone = "Asia/Makassar"; # Set your time zone.

@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, ... }: {
+{ pkgs, pkgs-unstable, inputs, system, ... }: {
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -16,6 +16,7 @@
     zoom-us
     lxqt.pcmanfm-qt
     firefox
+    inputs.zapfast.packages.${system}.default
 
     # Coding
     gnumake
