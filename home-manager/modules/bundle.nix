@@ -7,6 +7,7 @@
     ./qt.nix
 
     ./wms/hyprland.nix
-    ./wms/waybar.nix
+    ./wms/caelestia.nix
+    #./wms/waybar.nix
   ];
 }

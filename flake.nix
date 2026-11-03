@@ -14,6 +14,11 @@
     nix-flatpak = {
       url = "github:gmodena/nix-flatpak";
     };
+
+    caelestia = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, ... }@inputs:
@@ -39,6 +44,7 @@
     # gibekkk - username
     homeConfigurations.gibekkk = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
+      extraSpecialArgs = { inherit inputs; };
       modules = [ ./home-manager/home.nix ];
     };
   };
