@@ -1,5 +1,5 @@
 { inputs, ... }: {
-  imports = [ inputs.caelestia.homeModules.default ];
+  imports = [ inputs.caelestia.homeManagerModules.default ];
 
   programs.caelestia = {
     enable = true;
