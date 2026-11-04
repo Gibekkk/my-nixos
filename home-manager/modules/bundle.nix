@@ -6,6 +6,7 @@
     ./alacritty.nix
     ./zapfast.nix
     ./plasma.nix
+    ./plasma-workspace.nix
     #./qt.nix
 
     #./wms/hyprland.nix
