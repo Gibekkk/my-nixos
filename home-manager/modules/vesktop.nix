@@ -12,7 +12,7 @@
 #           ClearURLs.enabled = true;
 #           FixYoutubeEmbeds.enabled = true;
 #         };
-#       };
+       };
 
       themes = {
         system24 = ./themes/vesktop/system24.theme.css;
