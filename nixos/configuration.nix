@@ -1,4 +1,4 @@
-{ inputs, ...}: {
+{ pkgs, inputs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./packages.nix
@@ -8,12 +8,6 @@
 
   networking.hostName = "Gibekkk"; # Define your hostname.
  
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    config.common.default = "*";
-  };
-
   networking.extraHosts = ''
     100.105.193.52 bobian
     100.116.34.120 rudos
