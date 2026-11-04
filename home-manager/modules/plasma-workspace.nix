@@ -247,6 +247,7 @@
       plasmashell."toggle do not disturb" = [ ];
       "services/firefox.desktop"._launch = "Alt+F1";
       "services/zapfast.desktop"._launch = "Alt+C";
+      "services/kcalc.desktop"._launch = "Alt+4";
       "services/org.kde.konsole.desktop".NewTab = [ ];
       "services/org.kde.konsole.desktop".NewWindow = [ ];
       "services/org.kde.konsole.desktop"._launch = "Alt+F2";
