@@ -8,6 +8,7 @@
     ./plasma.nix
     ./plasma-workspace.nix
     ./plasma-panel.nix
+    ./vesktop.nix
     #./qt.nix
 
     #./wms/hyprland.nix

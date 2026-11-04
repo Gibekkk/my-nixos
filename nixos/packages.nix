@@ -21,7 +21,7 @@
     firefox
     inputs.zapfast.packages.${system}.default
     github-desktop
-    webcord-vencord
+    vesktop
     kdePackages.kcalc
 
     # Coding
@@ -66,7 +66,6 @@
     imv
     mako
     pavucontrol
-    vencord
 
     # Wayland
     wl-clipboard
