@@ -15,7 +15,7 @@
        };
 
       themes = {
-        system24 = ./themes/vesktop/system24.theme.css;
+        system24 = ../../themes/vesktop/system24.theme.css;
       };
     };
   };
