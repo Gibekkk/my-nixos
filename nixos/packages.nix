@@ -26,6 +26,8 @@
     (python3.withPackages (ps: with ps; [ requests ]))
 
     # CLI utils
+    xsel
+    xclip
     fastfetch
     file
     tree
@@ -60,7 +62,7 @@
     pavucontrol
 
     # Wayland
-    #wl-clipboard
+    wl-clipboard
     cliphist
     #hyprpaper
 
