@@ -73,7 +73,7 @@ in
         {
           name = kvitalsId;
           config.General = {
-            pinnedMetrics = "cpu/usage/usage,ram/system,swap/percentage,temp/percent,net/down,net/up,uptime/uptime";
+            pinnedMetrics = "cpu/usage/usage,ram/usage,swap/percentage,temp/percent,net/down,net/up,uptime/uptime";
           };
         }
 
