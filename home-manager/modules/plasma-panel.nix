@@ -27,7 +27,7 @@ let
     owner = "yassine20011";
     repo = "kvitals";
     rev = "d8eef578dcd7f00799daa3c9567ed59a18738d71";
-    hash = lib.fakeHash; # replace with the "got:" hash from the first build error
+    hash = "sha256-SQ3TlpmnCRT2pJTZfn/B38xb2ErDHezXFVABWmabzS8=";
   };
 
   indicatorId = "com.github.dualitykyle.desktopindicator";
@@ -37,7 +37,7 @@ let
     owner = "DualityKyle";
     repo = "plasma-desktop-indicator";
     rev = "5092d0e7921b3ab7d0b03032ce14b6d088e7e64f";
-    hash = lib.fakeHash; # replace with the "got:" hash from the first build error
+    hash = "sha256-gDPh/ABuu4xGdsAunOyiUK64816QxSGxWyqwUe3aXT0=";
   };
 in
 {
