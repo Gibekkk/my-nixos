@@ -17,8 +17,8 @@
     lxqt.pcmanfm-qt
     firefox
     inputs.zapfast.packages.${system}.default
-    vencord
     github-desktop
+    webcord-vencord
 
     # Coding
     gnumake
@@ -61,6 +61,7 @@
     imv
     mako
     pavucontrol
+    vencord
 
     # Wayland
     wl-clipboard
