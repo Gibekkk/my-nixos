@@ -10,6 +10,6 @@ in
 {
     environment.systemPackages = [
         (mkScript "gpush" [ pkgs.git ])
-	(mkScript "nshell" [ ])
+	#(mkScript "nshell" [ ])
     ];
 }
