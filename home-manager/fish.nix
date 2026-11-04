@@ -10,7 +10,7 @@ in {
       upd   = "nix flake update --flake ${flakeDir}";
       conf  = "nvim ${flakeDir}/nixos/configuration.nix";
       ff    = "fastfetch";
-      clean = "nix-collect-garbage -d";
+      clean = "sudo nix-collect-garbage -d";
     };
     functions.fish_greeting = ''
       echo "Welcome back, $USER" | lolcat
