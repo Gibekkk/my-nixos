@@ -10,11 +10,4 @@
     enable32Bit = true;
     extraPackages = [ pkgs.rocmPackages.clr.icd ];
   };
-
-  boot.kernelParams = [
-    "amdgpu.si_support=1"
-    "amdgpu.cik_support=1"
-    "radeon.si_support=0"
-    "radeon.cik_support=0"
-  ];
 }

@@ -86,6 +86,9 @@
     home-manager
     spice-vdagent
     papirus-nord
+
+    # Games
+    protonplus
   ];
 
   hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
