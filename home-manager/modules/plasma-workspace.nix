@@ -276,6 +276,12 @@
       kwinrc.Desktops.Number = 5;
       kwinrc.Desktops.Rows = 1;
       kwinrc.Windows.RollOverDesktops = true;
+
+      kwinrc.TabBox.LayoutName = "flipswitch";
+      kwinrc.TabBox.ShowTabBox = false;
+
+      kwinrc.Plugins.slidebackEnabled = true;
+      kwinrc.Plugins.wobblywindowsEnabled = true;
     };
 
     fonts = {
