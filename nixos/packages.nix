@@ -72,7 +72,7 @@
     # GPU
     radeontop
     vulkan-tools
-    glxinfo
+    mesa-demos
     pascube
 
     # Screenshots
