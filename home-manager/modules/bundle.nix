@@ -7,6 +7,7 @@
     ./zapfast.nix
     ./plasma.nix
     ./plasma-workspace.nix
+    ./plasma-panel.nix
     #./qt.nix
 
     #./wms/hyprland.nix
