@@ -17,6 +17,7 @@
     lxqt.pcmanfm-qt
     firefox
     inputs.zapfast.packages.${system}.default
+    vencord
 
     # Coding
     gnumake
