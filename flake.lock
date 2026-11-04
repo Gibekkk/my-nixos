@@ -1,5 +1,23 @@
 {
   "nodes": {
+    "artcraft": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1793707922,
+        "narHash": "sha256-csbxoSQ5usMB3auYpvoMN5/m8NgckO9btjOpJV5coUM=",
+        "owner": "ipeglin",
+        "repo": "artcraft-nix",
+        "rev": "d9ba5bcb4e24acd4a6ffe5adadd26ef512ac0355",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipeglin",
+        "repo": "artcraft-nix",
+        "type": "github"
+      }
+    },
     "caelestia": {
       "inputs": {
         "caelestia-cli": "caelestia-cli",
@@ -107,16 +125,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1793633738,
-        "narHash": "sha256-tItrb9M8eYA6WhFgmT9tpGKueri3+wRuVA952o/2xSU=",
-        "owner": "nixos",
+        "lastModified": 1793540411,
+        "narHash": "sha256-fiPJ88izTVucjeo2EQ3jk4aWmLg03I1D4vxnX2QjEgE=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "7dcdd87373d72e7a2173e4db02e20d3d7f495cfd",
+        "rev": "0bb2eedc20e4739f29e8045034f2828ad7054f8f",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-26.05",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -138,6 +156,22 @@
       }
     },
     "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1793633738,
+        "narHash": "sha256-tItrb9M8eYA6WhFgmT9tpGKueri3+wRuVA952o/2xSU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "7dcdd87373d72e7a2173e4db02e20d3d7f495cfd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1789785513,
         "narHash": "sha256-B44WL6h0XoLjJ41bUPJk0X5SDinLCII//6EcBLXKiJ0=",
@@ -199,10 +233,11 @@
     },
     "root": {
       "inputs": {
+        "artcraft": "artcraft",
         "caelestia": "caelestia",
         "home-manager": "home-manager",
         "nix-flatpak": "nix-flatpak",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "plasma-manager": "plasma-manager",
         "zapfast": "zapfast"
@@ -231,7 +266,7 @@
     },
     "zapfast": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "rust-overlay": "rust-overlay"
       },
       "locked": {

@@ -1,5 +1,8 @@
 { pkgs, pkgs-unstable, inputs, system, ... }: {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-41.10.7"
+  ];
 
   environment.systemPackages = with pkgs; [
     # Desktop apps
