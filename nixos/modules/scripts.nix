@@ -9,7 +9,7 @@ let
 in
 {
     environment.systemPackages = [
-        (mkScript "gpush" [ git ])
+        (mkScript "gpush" [ pkgs.git ])
 	(mkScript "nshell" [ ])
     ];
 }
