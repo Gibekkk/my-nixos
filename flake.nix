@@ -32,7 +32,7 @@
 
     artcraft = {
       url = "github:ipeglin/artcraft-nix";
-    }
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, artcraft, ... }@inputs:
