@@ -5,11 +5,12 @@ in {
   programs.fish = {
     enable = true;
     shellAliases = {
-      rb   = "sudo nixos-rebuild switch --flake ${flakeDir}#Gibekkk";
-      hms  = "home-manager switch --flake ${flakeDir}#gibekkk";
-      upd  = "nix flake update --flake ${flakeDir}";
-      conf = "nvim ${flakeDir}/nixos/configuration.nix";
-      ff   = "fastfetch";
+      rb    = "sudo nixos-rebuild switch --flake ${flakeDir}#Gibekkk";
+      hms   = "home-manager switch --flake ${flakeDir}#gibekkk";
+      upd   = "nix flake update --flake ${flakeDir}";
+      conf  = "nvim ${flakeDir}/nixos/configuration.nix";
+      ff    = "fastfetch";
+      clean = "nix-collect-garbage -d"
     };
     functions.fish_greeting = ''
       echo "Welcome back, $USER" | lolcat

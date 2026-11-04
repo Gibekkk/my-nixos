@@ -3,7 +3,7 @@
     ./bootloader.nix
     ./sound.nix
     ./avahi.nix
-    ./zram.nix
+    #./zram.nix
     ./env.nix
     ./user.nix
     #./xserver.nix
