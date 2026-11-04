@@ -91,11 +91,9 @@
   hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
 
   fonts.packages = with pkgs; [
-    jetbrains-mono
-    noto-fonts
-    noto-fonts-color-emoji
-    font-awesome
-    powerline-fonts
-    nerd-fonts.symbols-only
+    (pkgs.runCommand "biscuit-glitch-font" { } ''
+      mkdir -p $out/share/fonts/truetype
+      cp ${../fonts/BiscuitGlitch.ttf} $out/share/fonts/truetype/
+      '')
   ];
 }
