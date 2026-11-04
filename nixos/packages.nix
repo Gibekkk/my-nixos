@@ -22,6 +22,7 @@
     inputs.zapfast.packages.${system}.default
     github-desktop
     webcord-vencord
+    kdePackages.kcalc
 
     # Coding
     gnumake
@@ -57,6 +58,7 @@
     fd
     bat
     vim
+    calc
     fzf
 
     # GUI utils
