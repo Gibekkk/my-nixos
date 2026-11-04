@@ -12,7 +12,7 @@
     kdePackages.dolphin
     kdePackages.konsole
     gparted
-    obsidian
+    pkgs-unstable.obsidian
     zoom-us
     lxqt.pcmanfm-qt
     firefox
