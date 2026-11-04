@@ -17,5 +17,6 @@
     #./greetd.nix
     ./xdg.nix
     ./plasma.nix
+    ./scripts.nix
   ];
 }
