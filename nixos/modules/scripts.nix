@@ -1,5 +1,5 @@
 { pkgs , ... }:
-let
+lett
     mkScript = name: deps:
         pkgs.writeShellApplication {
             inherit name;
@@ -9,6 +9,7 @@ let
 in
 {
     environment.systemPackages = [
-        (mkScript "gpush" [ ])
+        (mkScript "gpush" [ git ])
+	(mkScript "nshell" [ ])
     ];
 }
