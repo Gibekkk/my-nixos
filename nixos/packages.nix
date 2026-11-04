@@ -91,14 +91,6 @@
 
     # Games
     protonplus
-
-    # ArtCrafts
-    wordcraft
-    gridcraft
-    deckcraft
-    filmcraft
-    photocraft
-    pdfcraft
   ];
 
   hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
