@@ -18,6 +18,7 @@
     firefox
     inputs.zapfast.packages.${system}.default
     vencord
+    github-desktop
 
     # Coding
     gnumake
