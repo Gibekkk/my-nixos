@@ -246,6 +246,7 @@
       plasmashell."switch to previous activity" = [ ];
       plasmashell."toggle do not disturb" = [ ];
       "services/firefox.desktop"._launch = "Alt+F1";
+      "services/zapfast.desktop"._launch = "Alt+C";
       "services/org.kde.konsole.desktop".NewTab = [ ];
       "services/org.kde.konsole.desktop".NewWindow = [ ];
       "services/org.kde.konsole.desktop"._launch = "Alt+F2";
