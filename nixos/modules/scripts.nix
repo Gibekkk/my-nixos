@@ -1,5 +1,5 @@
 { pkgs , ... }:
-lett
+let
     mkScript = name: deps:
         pkgs.writeShellApplication {
             inherit name;
