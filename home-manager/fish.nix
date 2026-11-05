@@ -24,7 +24,7 @@ in {
       bind --erase \ct \cr \ec
       bind \cf fzf-file-widget      # Ctrl+F: files
       bind \cr fzf-history-widget   # Ctrl+R: history
-      bind \eg fzf-cd-widget        # Alt+G: cd
+      bind \ct fzf-cd-widget        # Ctrl+T: cd
     '';
   };
 
