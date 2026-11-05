@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   flakeDir = "${config.home.homeDirectory}/nix";
 in {
@@ -18,6 +18,23 @@ in {
     plugins = [
       { name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
     ];
+
+    # Custom keybinds. mkAfter runs after fzf's own bindings.
+    interactiveShellInit = lib.mkAfter ''
+      bind --erase \ct \cr \ec
+      bind \cf fzf-file-widget      # Ctrl+F: files
+      bind \cr fzf-history-widget   # Ctrl+R: history
+      bind \eg fzf-cd-widget        # Alt+G: cd
+    '';
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+    defaultCommand = "fd --type f --hidden --exclude .git";
+    fileWidgetCommand = "fd --type f --hidden --exclude .git";
+    fileWidgetOptions = [ "--preview 'bat --color=always --line-range :200 {}'" ];
+    changeDirWidgetCommand = "fd --type d --hidden --exclude .git";
   };
 
   programs.starship.enable = true;
