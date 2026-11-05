@@ -41,7 +41,7 @@
   artcraft-flake = {
     url = "github:mahlquistj/artcraft-flake";
   };
-  };
+};
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, artcraft, ... }@inputs:
 
@@ -61,7 +61,7 @@
       modules = [
         nix-flatpak.nixosModules.nix-flatpak
         ./nixos/configuration.nix
-        artcraft.nixosModules.default
+        artcraft-flake.nixosModules.default
       ];
     };
 
