@@ -26,6 +26,9 @@
     kdePackages.kcalc
     spotify
     virtualbox
+    godot
+    ventoy-full-gtk
+    impression
 
     # Coding
     gnumake
