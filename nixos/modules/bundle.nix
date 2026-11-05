@@ -1,5 +1,6 @@
 {
   imports = [
+    ./autostart.nix
     ./bootloader.nix
     ./sound.nix
     ./avahi.nix
