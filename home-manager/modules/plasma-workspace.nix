@@ -283,6 +283,10 @@
 
       kwinrc.Plugins.slidebackEnabled = true;
       kwinrc.Plugins.wobblywindowsEnabled = true;
+      kwinrc.MouseBindings = {
+        CommandAll1 = "Activate, raise and move";    # Meta + left drag
+        CommandAll3 = "Activate, raise and resize";  # Meta + right drag
+      };
     };
 
     fonts = {
