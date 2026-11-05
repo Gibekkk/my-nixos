@@ -19,5 +19,6 @@
     ./plasma.nix
     ./scripts.nix
     ./steam.nix
+    ./artcraft.nix
   ];
 }

@@ -15,13 +15,17 @@
       url = "github:gmodena/nix-flatpak";
     };
 
-    caelestia = {
-      url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+#     caelestia = {
+#       url = "github:caelestia-dots/shell";
+#       inputs.nixpkgs.follows = "nixpkgs";
+#     };
 
     zapfast = {
       url = "github:crmne/zapfast";
+    };
+
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
     };
 
     plasma-manager = {

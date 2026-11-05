@@ -12,6 +12,7 @@
     ./plasma-wallpaper.nix
     ./vesktop.nix
     ./firefox.nix
+    ./spicetify.nix
     #./qt.nix
 
     #./wms/hyprland.nix

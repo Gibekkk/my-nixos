@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
   pluginId = "luisbocanegra.smart.video.wallpaper.reborn";
@@ -11,7 +11,7 @@ let
       owner = "luisbocanegra";
       repo = "plasma-smart-video-wallpaper-reborn";
       rev = "0b4beb873850d5a857fe35af9d63571d9df35e63";
-      hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+      hash = "sha256-mKDU/CU7BaqyBQpjvFsV20kWKh/b89gIgha8HVh8/OA=";
     };
 
     # Don't let windows that are demanding attention (and not focused) count

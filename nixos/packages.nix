@@ -68,7 +68,7 @@
     imv
     mako
     pavucontrol
-    spicetify
+    #spicetify
 
     # Wayland
     wl-clipboard
