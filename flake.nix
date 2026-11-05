@@ -35,7 +35,7 @@
     };
 };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, flake, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, ... }@inputs:
 
     let
       system = "x86_64-linux";
