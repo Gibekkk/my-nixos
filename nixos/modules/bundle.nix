@@ -1,5 +1,6 @@
 {
   imports = [
+    ./virtualbox.nix
     ./bootloader.nix
     ./sound.nix
     ./avahi.nix

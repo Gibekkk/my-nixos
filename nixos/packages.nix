@@ -25,6 +25,7 @@
     vesktop
     kdePackages.kcalc
     spotify
+    virtualbox
 
     # Coding
     gnumake
