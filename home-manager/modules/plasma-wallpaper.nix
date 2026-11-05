@@ -11,8 +11,20 @@ let
       owner = "luisbocanegra";
       repo = "plasma-smart-video-wallpaper-reborn";
       rev = "0b4beb873850d5a857fe35af9d63571d9df35e63";
-      hash = lib.fakeHash; # replace with the "got:" hash from the first build error
+      hash = lib.fakeHash; # keep YOUR real hash here
     };
+
+    # Don't let windows that are demanding attention (and not focused) count
+    # toward pausing the video
+    postPatch = ''
+      substituteInPlace package/contents/ui/TasksModel.qml \
+        --replace-fail 'if (filterByActive && !tasksModel.data(currentTask, isActive))' \
+'if (tasksModel.data(currentTask, abstractTasksModel.IsDemandingAttention) && !tasksModel.data(currentTask, isActive))
+                continue;
+
+            if (filterByActive && !tasksModel.data(currentTask, isActive))'
+    '';
+
     dontBuild = true;
     installPhase = ''
       runHook preInstall
@@ -44,6 +56,12 @@ in
           dayNightPhase = 4;
         }
       ];
+
+      # Keep playing when the battery is low
+      BatteryPausesVideo = false;
+
+      # Never switch to another video (0 = Never)
+      ChangeWallpaperMode = 0;
     };
   };
 }
