@@ -1,5 +1,5 @@
 {
- program.crafts.enable = [
+ programs.crafts.enable = [
     "wordcraft"
     "gridcraft"
     "deckcraft"
