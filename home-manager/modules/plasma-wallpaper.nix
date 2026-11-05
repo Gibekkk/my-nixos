@@ -11,7 +11,7 @@ let
       owner = "luisbocanegra";
       repo = "plasma-smart-video-wallpaper-reborn";
       rev = "0b4beb873850d5a857fe35af9d63571d9df35e63";
-      hash = lib.fakeHash; # keep YOUR real hash here
+      hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
     };
 
     # Don't let windows that are demanding attention (and not focused) count
