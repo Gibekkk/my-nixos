@@ -24,6 +24,7 @@
     github-desktop
     vesktop
     kdePackages.kcalc
+    spotify
 
     # Coding
     gnumake
@@ -67,6 +68,7 @@
     imv
     mako
     pavucontrol
+    spicetify
 
     # Wayland
     wl-clipboard
