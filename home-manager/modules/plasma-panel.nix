@@ -39,6 +39,120 @@ let
     rev = "5092d0e7921b3ab7d0b03032ce14b6d088e7e64f";
     hash = "sha256-gDPh/ABuu4xGdsAunOyiUK64816QxSGxWyqwUe3aXT0=";
   };
+
+  # KVitals profile, copied from the live config (appletsrc) after tuning
+  kvitalsProfileId = "c2538c5a-bbbd-4342-9804-10346294af62";
+  kvitalsData = {
+    pinnedMetrics = "cpu/usage,ram/used,swap/percent,net/down,net/up,temp/system,uptime/uptime";
+    cpuEnabled = true;
+    cpuSubMetrics = "usage,freq,temp";
+    cpuVisibility = "both";
+    ramEnabled = true;
+    ramSubMetrics = "percentage";
+    ramWidgetShowBoth = false;
+    ramVisibility = "both";
+    ramUnit = "GiB";
+    swapEnabled = false;
+    swapSubMetrics = "percent,used";
+    swapVisibility = "both";
+    tempEnabled = true;
+    tempLabel = "System";
+    tempVisibility = "both";
+    tempSensor = "auto";
+    tempSelection = "";
+    tempLabels = "";
+    gpuEnabled = true;
+    gpuSubMetrics = "usage,vram,temp";
+    gpuVisibility = "both";
+    batEnabled = true;
+    batSubMetrics = "percentage,power";
+    batVisibility = "both";
+    netEnabled = true;
+    netSubMetrics = "down,up";
+    netVisibility = "both";
+    diskEnabled = false;
+    diskSubMetrics = "read,write";
+    diskVisibility = "both";
+    fanEnabled = false;
+    fanVisibility = "both";
+    uptimeEnabled = false;
+    uptimeVisibility = "both";
+    cpuLabel = "CPU";
+    ramLabel = "RAM";
+    swapLabel = "SWAP";
+    diskLabel = "DSK";
+    diskLabels = "";
+    netLabel = "NET";
+    networkInterface = "auto";
+    showNetworkIp = false;
+    batteryDevice = "auto";
+    batLabel = "BAT";
+    gpuSelection = "";
+    gpuLabels = "";
+    fanLabel = "FAN";
+    fanLabels = "";
+    coolantLabels = "";
+    displayMode = "icons";
+    layoutType = "horizontal";
+    iconSize = 12;
+    mergeFamilyMetrics = true;
+    showSeparators = true;
+    backgroundType = "default";
+    panelPadding = 0;
+    cpuIcon = "cpu-symbolic";
+    ramIcon = "memory-symbolic";
+    swapIcon = "memory-symbolic";
+    tempIcon = "temperature-symbolic";
+    gpuIcon = "gpu-symbolic";
+    batteryIcon = "battery-symbolic";
+    powerIcon = "voltage-symbolic";
+    networkIcon = "network-symbolic";
+    diskIcon = "storage-symbolic";
+    fanIcon = "fan-symbolic";
+    uptimeIcon = "system-symbolic";
+    fontFamily = "monospace";
+    fontSize = 0;
+    fontBold = false;
+    metricOrder = "cpu,ram,swap,temp,gpu,bat,net,disk,fan,uptime";
+    updateInterval = 2000;
+    useCustomColors = false;
+    iconColor = "";
+    labelColor = "";
+    fontColor = "";
+    enableThresholdColors = false;
+    warningColor = "#e5a50a";
+    criticalColor = "#da4453";
+    cpuWarningThreshold = 70;
+    cpuCriticalThreshold = 90;
+    tempWarningThreshold = 60;
+    tempCriticalThreshold = 85;
+    systemWarningThreshold = 60;
+    systemCriticalThreshold = 85;
+    ramWarningThreshold = 70;
+    ramCriticalThreshold = 90;
+    swapWarningThreshold = 70;
+    swapCriticalThreshold = 90;
+    ramTempWarningThreshold = 60;
+    ramTempCriticalThreshold = 85;
+    gpuWarningThreshold = 70;
+    gpuCriticalThreshold = 90;
+    gpuTempWarningThreshold = 60;
+    gpuTempCriticalThreshold = 85;
+    batteryWarningThreshold = 30;
+    batteryCriticalThreshold = 15;
+    diskWarningThreshold = 80;
+    diskCriticalThreshold = 90;
+    diskTempWarningThreshold = 45;
+    diskTempCriticalThreshold = 60;
+    coolantTempWarningThreshold = 40;
+    coolantTempCriticalThreshold = 50;
+    tempUnit = "C";
+    networkUnit = "bytes";
+    fanUnit = "rpm";
+    fanMaxRpm = 2000;
+    labelOpacity = 0.65;
+    separatorOpacity = 0.4;
+  };
 in
 {
   # Install the two KDE Store widgets where Plasma looks for user plasmoids
@@ -73,7 +187,21 @@ in
         {
           name = kvitalsId;
           config.General = {
-            pinnedMetrics = "cpu/usage/usage,ram/usage,swap/percentage,temp/percent,net/down,net/up,uptime/uptime";
+            migrationDone = true;
+            activeProfileId = kvitalsProfileId;
+            pinnedMetrics = kvitalsData.pinnedMetrics;
+            profileList = builtins.toJSON {
+              version = 1;
+              profiles = [
+                {
+                  id = kvitalsProfileId;
+                  name = "Default";
+                  createdAt = 1793839303616;
+                  isDefault = true;
+                  data = kvitalsData;
+                }
+              ];
+            };
           };
         }
 
