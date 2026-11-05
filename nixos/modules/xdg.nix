@@ -6,7 +6,8 @@
       xdg-desktop-portal-gtk # optional, helpful for GTK app compatibility
     ];
     # Optional: force specific backends if needed
-    config.common.default = "kde";
+    #config.common.default = "kde";
+    config.common.default = "*";
   };
 }
 
