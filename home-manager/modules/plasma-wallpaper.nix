@@ -44,6 +44,7 @@ in
   programs.plasma.workspace.wallpaperCustomPlugin = {
     plugin = pluginId;
     config.General = {
+      PauseMode = 0;
       VideoUrls = builtins.toJSON [
         {
           filename = "file://${video}";
