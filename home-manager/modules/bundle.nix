@@ -10,6 +10,7 @@
     ./plasma-panel.nix
     ./plasma-wallpaper.nix
     ./vesktop.nix
+    ./firefox.nix
     #./qt.nix
 
     #./wms/hyprland.nix

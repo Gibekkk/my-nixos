@@ -19,7 +19,7 @@
     pkgs-unstable.obsidian
     zoom-us
     lxqt.pcmanfm-qt
-    firefox
+    #firefox
     inputs.zapfast.packages.${system}.default
     github-desktop
     vesktop
