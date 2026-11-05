@@ -1,14 +1,10 @@
 {
-   programs.artcraft = {
-      enable = true;
-      apps = [
-         "wordcraft"
-	 "gridcraft"
-	 "deckcraft"
-	 "filmcraft"
-	 "photocraft"
-	 "pdfcraft"
-      ];
-      linkFonts = false;
-   };
+ program.crafts.enable = [
+    "wordcraft"
+    "gridcraft"
+    "deckcraft"
+    "filmcraft"
+    "photocraft"
+    "pdfcraft"
+  ];
 }

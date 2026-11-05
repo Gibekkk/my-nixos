@@ -34,9 +34,13 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    artcraft = {
-      url = "github:ipeglin/artcraft-nix";
-    };
+#     artcraft = {
+#       url = "github:ipeglin/artcraft-nix";
+#     };
+
+  artcraft-flake = {
+    url = "github:mahlquistj/artcraft-flake";
+  };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, artcraft, ... }@inputs:
@@ -57,7 +61,7 @@
       modules = [
         nix-flatpak.nixosModules.nix-flatpak
         ./nixos/configuration.nix
-	artcraft.nixosModules.default
+        artcraft.nixosModules.default
       ];
     };
 
