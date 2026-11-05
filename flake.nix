@@ -43,7 +43,7 @@
   };
 };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, artcraft, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, artcraft-flake, ... }@inputs:
 
     let
       system = "x86_64-linux";
