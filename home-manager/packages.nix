@@ -10,7 +10,6 @@
     inputs.zapfast.packages.${system}.default
     github-desktop
     vesktop
-    spotify
     virtualbox
     godot
 
