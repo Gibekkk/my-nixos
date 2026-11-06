@@ -164,7 +164,9 @@ in
   programs.plasma.panels = [
     {
       location = "bottom";
-      # height, hiding, floating etc. are stored in plasmashellrc, not in the
+      # Uncomment to autohide. Options: normalpanel, autohide, dodgewindows, windowsgobelow
+      # hiding = "autohide";
+      # height, floating etc. are stored in plasmashellrc, not in the
       # file I was given, so they are left at their defaults here.
       widgets = [
         # Application launcher
@@ -186,10 +188,12 @@ in
         # KVitals (KDE Store)
         {
           name = kvitalsId;
-          config.General = {
+          # Flat keys (kvitalsData) are what the widget reads at startup.
+          # profileList only stores the saved profile, so settings were
+          # not applied until "Apply" was clicked manually.
+          config.General = kvitalsData // {
             migrationDone = true;
             activeProfileId = kvitalsProfileId;
-            pinnedMetrics = kvitalsData.pinnedMetrics;
             profileList = builtins.toJSON {
               version = 1;
               profiles = [
@@ -205,12 +209,18 @@ in
           };
         }
 
-        # Task manager (nothing pinned, mouse wheel adjusts volume)
+        # Task manager: open windows only, nothing pinned
         {
           name = "org.kde.plasma.icontasks";
           config.General = {
-            launchers = [ ];
+            # Empty string = pin nothing. An empty list may write no key,
+            # and Plasma then falls back to its default pinned apps.
+            launchers = "";
             wheelEnabled = "AdjustVolume";
+            # Panel never pops up when a window wants attention
+            unhideOnAttention = false;
+            # Ignore windows on other virtual desktops
+            showOnlyCurrentDesktop = true;
           };
         }
 

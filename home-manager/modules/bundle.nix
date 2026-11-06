@@ -6,10 +6,10 @@
     ./htop.nix
     ./alacritty.nix
     ./zapfast.nix
-    ./plasma.nix
-    ./plasma-workspace.nix
-    ./plasma-panel.nix
-    ./plasma-wallpaper.nix
+    ./wms/plasma/plasma.nix
+    ./wms/plasma/plasma-workspace.nix
+    ./wms/plasma/plasma-panel.nix
+    ./wms/plasma/plasma-wallpaper.nix
     ./vesktop.nix
     ./firefox.nix
     ./spicetify.nix
