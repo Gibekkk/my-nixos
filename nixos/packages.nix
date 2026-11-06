@@ -27,7 +27,7 @@
     spotify
     virtualbox
     godot
-    ventoy-full-gtk
+    #ventoy-full-gtk
     impression
 
     # Coding
