@@ -1,4 +1,4 @@
-{ pkgs, system, ... }: {
+{ pkgs, ... }: {
   fileSystems."/home/gibets" = {
     device = "tmpfs";
     fsType = "tmpfs";

@@ -1,7 +1,7 @@
 { pkgs, pkgs-unstable, inputs, system, ... }: {
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     # Desktop apps
     telegram-desktop
     vscode
