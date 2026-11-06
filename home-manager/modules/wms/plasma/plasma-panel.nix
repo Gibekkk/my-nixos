@@ -166,6 +166,7 @@ in
       location = "bottom";
       # Uncomment to autohide. Options: normalpanel, autohide, dodgewindows, windowsgobelow
       hiding = "autohide";
+      floating = true;
       # height, floating etc. are stored in plasmashellrc, not in the
       # file I was given, so they are left at their defaults here.
       widgets = [
