@@ -64,12 +64,11 @@
             inherit system;
             config.allowUnfree = true;
         };
-        inherit inputs;
-        inherit system;
+        inherit inputs system;
       };
       modules = [
       inputs.plasma-manager.homeModules.plasma-manager
-      nix-flatpak.nixosModules.nix-flatpak
+      nix-flatpak.homeManagerModules.nix-flatpak
       ./home-manager/home.nix
       ];
     };
@@ -82,8 +81,7 @@
             inherit system;
             config.allowUnfree = true;
         };
-        inherit inputs;
-        inherit system;
+        inherit inputs system;
       };
       modules = [
       inputs.plasma-manager.homeModules.plasma-manager
