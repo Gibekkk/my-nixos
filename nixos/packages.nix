@@ -2,6 +2,7 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
     "electron-41.10.7"
+    "ventoy-gtk3-1.1.12"
   ];
 
   environment.systemPackages = with pkgs; [
@@ -27,7 +28,7 @@
     spotify
     virtualbox
     godot
-    #ventoy-full-gtk
+    ventoy-full-gtk
     impression
 
     # Coding

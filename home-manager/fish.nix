@@ -11,6 +11,7 @@ in {
       conf  = "nvim ${flakeDir}/nixos/configuration.nix";
       ff    = "fastfetch";
       clean = "sudo nix-collect-garbage -d";
+      fnix  = "cd ~/nix";
     };
     functions.fish_greeting = ''
       echo "Welcome back, $USER" | lolcat
