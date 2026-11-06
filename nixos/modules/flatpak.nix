@@ -9,7 +9,7 @@
 
         update.onActivation = false;
         uninstallUnmanaged = true;
-
-        fonts.fontDir.enable = true;
     };
+
+    fonts.fontDir.enable = true;
 }
