@@ -8,7 +8,7 @@ in
   programs.spicetify = {
     enable = true;
     theme = spicePkgs.themes.sleek;
-    colorScheme = "Ocean";
+    colorScheme = "Nord";
 
     enabledExtensions = with spicePkgs.extensions; [
       adblockify
