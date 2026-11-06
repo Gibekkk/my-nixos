@@ -56,7 +56,7 @@
       kwin."Switch Window Left" = [ ];
       kwin."Switch Window Right" = [ ];
       kwin."Switch Window Up" = [ ];
-      kwin."Switch to Desktop 1" = [ ];
+      kwin."Switch to Desktop 1" = [ "Meta+1" ];
       kwin."Switch to Desktop 10" = [ ];
       kwin."Switch to Desktop 11" = [ ];
       kwin."Switch to Desktop 12" = [ ];
@@ -67,16 +67,16 @@
       kwin."Switch to Desktop 17" = [ ];
       kwin."Switch to Desktop 18" = [ ];
       kwin."Switch to Desktop 19" = [ ];
-      kwin."Switch to Desktop 2" = [ ];
+      kwin."Switch to Desktop 2" =[ "Meta+2" ];
       kwin."Switch to Desktop 20" = [ ];
       kwin."Switch to Desktop 21" = [ ];
       kwin."Switch to Desktop 22" = [ ];
       kwin."Switch to Desktop 23" = [ ];
       kwin."Switch to Desktop 24" = [ ];
       kwin."Switch to Desktop 25" = [ ];
-      kwin."Switch to Desktop 3" = [ ];
-      kwin."Switch to Desktop 4" = [ ];
-      kwin."Switch to Desktop 5" = [ ];
+      kwin."Switch to Desktop 3" =[ "Meta+3" ];
+      kwin."Switch to Desktop 4" = [ "Meta+4" ];
+      kwin."Switch to Desktop 5" = [ "Meta+5" ];
       kwin."Switch to Desktop 6" = [ ];
       kwin."Switch to Desktop 7" = [ ];
       kwin."Switch to Desktop 8" = [ ];
@@ -287,6 +287,7 @@
         CommandAll1 = "Activate, raise and move";    # Meta + left drag
         CommandAll3 = "Activate, raise and resize";  # Meta + right drag
       };
+      kwinrc."Effect-slide".SlideBackground = false;
     };
 
     fonts = {
