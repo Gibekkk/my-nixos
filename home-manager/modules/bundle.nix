@@ -15,7 +15,7 @@
     ./spicetify.nix
     #./qt.nix
 
-    #./wms/hyprland.nix
+    #./wms/hyprlan/hyprland.nix
     #./wms/caelestia.nix
     #./wms/waybar.nix
   ];

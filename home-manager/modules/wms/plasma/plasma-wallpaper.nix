@@ -35,7 +35,8 @@ let
   };
 
   # The video lives in your repo, so it moves with the config
-  video = ../../backgrounds/furina-under-dark-skies.1920x1080.mp4;
+#   video = ../../backgrounds/furina-under-dark-skies.1920x1080.mp4;
+    video = ../../backgrounds/furina-night-sea-genshin-impact-moewalls-com.mp4;
 in
 {
   xdg.dataFile."plasma/wallpapers/${pluginId}".source =

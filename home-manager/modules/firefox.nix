@@ -13,8 +13,11 @@
         # lets userChrome.css be loaded
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
+        # load my selected profile only
+        "browser.profiles.enabled" = false;
+
         # web page text
-        "browser.display.use_document_fonts" = 0;
+        "browser.display.use_document_fonts" = 1;
         "font.default.x-western" = "sans-serif";
         "font.name.sans-serif.x-western" = "Biscuit Glitch";
         "font.name.serif.x-western" = "Biscuit Glitch";
