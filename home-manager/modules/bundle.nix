@@ -14,7 +14,6 @@
     ./firefox.nix
     ./spicetify.nix
     ./conky/conky.nix
-    ./steam.nix
     #./qt.nix
 
     #./wms/hyprlan/hyprland.nix

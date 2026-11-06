@@ -22,5 +22,6 @@
     ./scripts.nix
     ./graphics.nix
     ./flatpak.nix
+    ./steam.nix
   ];
 }
