@@ -58,6 +58,7 @@
     vim
     calc
     fzf
+    psmisc
 
     # GUI utils
     feh
