@@ -1,6 +1,6 @@
 { lib, pkgs, inputs, ... }:
 let
-  conf = builtins.readFile ./conky/conky.conf;
+  conf = builtins.readFile ./conky.conf;
 in
 {
   assertions = [
