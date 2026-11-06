@@ -20,7 +20,7 @@
     ./xdg.nix
     ./plasma.nix
     ./scripts.nix
-    ./steam.nix
+    ./graphics.nix
     ./flatpak.nix
   ];
 }

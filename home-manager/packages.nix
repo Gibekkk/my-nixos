@@ -35,11 +35,4 @@
   ];
 
   hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
-
-  fonts.packages = with pkgs; [
-    (pkgs.runCommand "biscuit-glitch-font" { } ''
-      mkdir -p $out/share/fonts/truetype
-      cp ${../fonts/BiscuitGlitch.ttf} $out/share/fonts/truetype/
-      '')
-  ];
 }
