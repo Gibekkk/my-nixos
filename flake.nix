@@ -82,7 +82,7 @@
             config.allowUnfree = true;
         };
         inherit inputs;
-        inherit.system;
+        inherit system;
       };
       modules = [
       inputs.plasma-manager.homeModules.plasma-manager
