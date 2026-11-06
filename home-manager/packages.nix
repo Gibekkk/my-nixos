@@ -33,6 +33,4 @@
     # Games
     protonplus
   ];
-
-  hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
 }
