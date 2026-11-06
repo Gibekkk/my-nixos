@@ -197,11 +197,11 @@
       mediacontrol.nextmedia = ["Meta+2" "Media Next"];
       mediacontrol.pausemedia = "Media Pause";
       mediacontrol.playmedia = [ ];
-      mediacontrol.playpausemedia = ["Media Play" "Meta+3"];
-      mediacontrol.previousmedia = ["Media Previous" "Meta+1"];
-      mediacontrol.seekbackwardmedia = ["Alt+1" "Media Rewind"];
+      mediacontrol.playpausemedia = ["Media Play" "Alt+3"];
+      mediacontrol.previousmedia = ["Media Previous" "Alt+1"];
+      mediacontrol.seekbackwardmedia = ["Alt+Shift+1" "Media Rewind"];
       mediacontrol.seekbackwardmedialong = [ ];
-      mediacontrol.seekforwardmedia = ["Media Fast Forward" "Alt+2"];
+      mediacontrol.seekforwardmedia = ["Media Fast Forward" "Alt+Shift+2"];
       mediacontrol.seekforwardmedialong = [ ];
       mediacontrol.stopmedia = "Media Stop";
       org_kde_powerdevil."Decrease Keyboard Brightness" = "Keyboard Brightness Down";
