@@ -65,5 +65,15 @@
       ./home-manager/home.nix
       ];
     };
+
+    # gibets - username
+    homeConfigurations.gibets = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.${system};
+      extraSpecialArgs = { inherit inputs; };
+      modules = [
+      inputs.plasma-manager.homeModules.plasma-manager
+      ./temp-home-manager/home.nix
+      ];
+    };
   };
 }

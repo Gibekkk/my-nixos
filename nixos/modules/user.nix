@@ -10,6 +10,13 @@
       extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
       packages = with pkgs; [];
     };
+
+    users.gibets = {
+      isNormalUser = true;
+      description = "Gilbert Temporary";
+      extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
+      packages = with pkgs; [];
+    };
   };
 
   # Enable automatic login for the user.

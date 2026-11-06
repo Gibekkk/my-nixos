@@ -13,6 +13,7 @@
     ./vesktop.nix
     ./firefox.nix
     ./spicetify.nix
+    ./conky/conky.nix
     #./qt.nix
 
     #./wms/hyprlan/hyprland.nix

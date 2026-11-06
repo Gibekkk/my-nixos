@@ -3,7 +3,6 @@
     ./hardware-configuration.nix
     ./packages.nix
     ./modules/bundle.nix
-    ./modules/flatpak/flatpak.nix
   ];
 
   networking.hostName = "Gibekkk"; # Define your hostname.

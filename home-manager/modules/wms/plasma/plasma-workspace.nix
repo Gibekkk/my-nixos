@@ -285,7 +285,7 @@
       kwinrc.Plugins.wobblywindowsEnabled = true;
       kwinrc.MouseBindings = {
         CommandAll1 = "Activate, raise and move";    # Meta + left drag
-        CommandAll3 = "Activate, raise and resize";  # Meta + right drag
+        CommandAll3 = "Resize";  # Meta + right drag
       };
       kwinrc."Effect-slide".SlideBackground = false;
     };

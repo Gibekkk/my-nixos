@@ -2,6 +2,8 @@
   imports = [
     ./fish.nix
     ./modules/bundle.nix
+    ./packages.nix
+    ./modules/flatpak/flatpak.nix
   ];
 
   home = {

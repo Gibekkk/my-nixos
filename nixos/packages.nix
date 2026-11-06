@@ -7,8 +7,6 @@
 
   environment.systemPackages = with pkgs; [
     # Desktop apps
-    telegram-desktop
-    vscode
     #alacritty
     rofi
     wofi
@@ -17,17 +15,9 @@
     kdePackages.dolphin
     kdePackages.konsole
     gparted
-    pkgs-unstable.obsidian
-    zoom-us
     lxqt.pcmanfm-qt
-    #firefox
-    inputs.zapfast.packages.${system}.default
     github-desktop
-    vesktop
     kdePackages.kcalc
-    spotify
-    virtualbox
-    godot
     ventoy-full-gtk
     impression
 
@@ -73,7 +63,6 @@
     imv
     mako
     pavucontrol
-    #spicetify
 
     # Wayland
     wl-clipboard
@@ -100,9 +89,6 @@
     home-manager
     spice-vdagent
     papirus-nord
-
-    # Games
-    protonplus
   ];
 
   hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
