@@ -69,6 +69,7 @@
       };
       modules = [
       inputs.plasma-manager.homeModules.plasma-manager
+      nix-flatpak.nixosModules.nix-flatpak
       ./home-manager/home.nix
       ];
     };
