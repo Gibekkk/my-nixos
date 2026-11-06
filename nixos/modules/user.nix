@@ -20,12 +20,6 @@
     };
   };
 
-  fileSystems."/home/temp" = {
-    device = "tmpfs";
-    fsType = "tmpfs";
-    options = [ "mode=0700" "uid=1100" "gid=100" "size=4G" ];
-  };
-
   # Enable automatic login for the user.
   # services.getty.autologinUser = "gibekkk";
 }
