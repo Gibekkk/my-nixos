@@ -194,7 +194,7 @@
       kwin.view_zoom_out = "Meta+Ctrl+Shift+S";
       mediacontrol.mediavolumedown = [ ];
       mediacontrol.mediavolumeup = [ ];
-      mediacontrol.nextmedia = ["Meta+2" "Media Next"];
+      mediacontrol.nextmedia = ["Alt+2" "Media Next"];
       mediacontrol.pausemedia = "Media Pause";
       mediacontrol.playmedia = [ ];
       mediacontrol.playpausemedia = ["Media Play" "Alt+3"];
