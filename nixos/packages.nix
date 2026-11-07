@@ -97,7 +97,7 @@
 
   fonts.packages = with pkgs; [
     poppins
-    cormorant
+    texlivePackages.cormorantgaramond
     (pkgs.runCommand "biscuit-glitch-font" { } ''
       mkdir -p $out/share/fonts/truetype
       cp ${../fonts/BiscuitGlitch.ttf} $out/share/fonts/truetype/
