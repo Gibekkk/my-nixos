@@ -9,4 +9,5 @@ in
     package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.conky;
     extraConfig = conf;
   };
+  xdg.configFile."conky/clock.lua".source = ./conky/clock.lua;
 }
