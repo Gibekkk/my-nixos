@@ -1,12 +1,13 @@
-{ pkgs, ... }:
-
+{ lib, pkgs, inputs, ... }:
+let
+  conf = builtins.readFile ./conky.conf;
+in
 {
   services.conky = {
     enable = true;
-    # Config lives in its own file, so conky's ${...} syntax needs no Nix escaping
-    extraConfig = builtins.readFile ./conky.conf;
+    # conky 1.25.3 from unstable: supports own_window_namespace
+    package = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.conky;
+    extraConfig = conf;
   };
-
-  # The config uses JetBrains Mono
-  home.packages = [ pkgs.jetbrains-mono ];
+  xdg.configFile."clock.lua".source = ./clock.lua;
 }
