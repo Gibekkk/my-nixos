@@ -58,8 +58,6 @@
       modules = [
         nix-flatpak.nixosModules.nix-flatpak
         ./nixos/configuration.nix
-        disko.nixosModules.disko
-        ./disko.nix
       ];
     };
 
