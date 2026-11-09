@@ -1,6 +1,5 @@
 {
   imports = [
-    ./serverui.nix
     ./filesystem.nix
     ./virtualbox.nix
     ./bootloader.nix

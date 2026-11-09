@@ -1,5 +1,6 @@
 {
   imports = [
+    ./serverui.nix
     ./autostart.nix
     ./cursor.nix
     ./git.nix
