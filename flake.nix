@@ -33,9 +33,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, disko, ... }@inputs:
 
     let
       system = "x86_64-linux";
@@ -53,6 +58,8 @@
       modules = [
         nix-flatpak.nixosModules.nix-flatpak
         ./nixos/configuration.nix
+        disko.nixosModules.disko
+        ./disko.nix
       ];
     };
 
