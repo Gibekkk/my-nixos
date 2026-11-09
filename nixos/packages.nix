@@ -30,6 +30,7 @@
 
     # CLI utils
     xsel
+    glib
     xclip
     fastfetch
     file
