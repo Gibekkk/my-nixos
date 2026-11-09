@@ -5,8 +5,8 @@ in {
   programs.fish = {
     enable = true;
     shellAliases = {
-      rb    = "sudo nixos-rebuild switch --flake ${flakeDir}#";
-      hms   = "home-manager switch --flake ${flakeDir}#";
+      rb    = "sudo nixos-rebuild switch --flake ${flakeDir}";
+      hms   = "home-manager switch --flake ${flakeDir}";
       upd   = "nix flake update --flake ${flakeDir}";
       conf  = "nvim ${flakeDir}/nixos/configuration.nix";
       ff    = "fastfetch";
