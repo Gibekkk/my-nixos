@@ -1,6 +1,7 @@
 {
   imports = [
     ./filesystem.nix
+    ./sshmode.nix
     ./virtualbox.nix
     ./bootloader.nix
     ./sound.nix
