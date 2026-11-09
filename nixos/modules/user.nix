@@ -14,9 +14,8 @@
     users.gibets = {
       isNormalUser = true;
       description = "Gilbert Temporary";
-      extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" ];
+      extraGroups = [ "networkmanager" "input" "libvirtd" ];
       packages = with pkgs; [];
-      uid = 1100;
     };
   };
 
