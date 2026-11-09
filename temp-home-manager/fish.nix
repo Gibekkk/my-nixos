@@ -1,17 +1,17 @@
 { config, lib, pkgs, ... }:
 let
-  flakeDir = "${config.home.homeDirectory}/nix";
+  flakeDir = "${config.home.homeDirectory}/../shared/nix";
 in {
   programs.fish = {
     enable = true;
     shellAliases = {
-      rb    = "sudo nixos-rebuild switch --flake ${flakeDir}#Gibekkk";
-      hms   = "home-manager switch --flake ${flakeDir}#gibets";
+      rb    = "sudo nixos-rebuild switch --flake ${flakeDir}#";
+      hms   = "home-manager switch --flake ${flakeDir}#";
       upd   = "nix flake update --flake ${flakeDir}";
       conf  = "nvim ${flakeDir}/nixos/configuration.nix";
       ff    = "fastfetch";
       clean = "sudo nix-collect-garbage -d";
-      fnix  = "cd ~/nix";
+      fnix  = "cd ~/../shared/nix";
     };
     functions.fish_greeting = ''
       echo "Welcome back, $USER" | lolcat
