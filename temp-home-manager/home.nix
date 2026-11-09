@@ -2,7 +2,7 @@
   imports = [
     ./fish.nix
     ./modules/bundle.nix
-    ./packages
+    ./packages.nix
   ];
 
   home = {
