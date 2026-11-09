@@ -5,5 +5,6 @@
       name = "Gibekkk";
       email = "www.gilbertwinardy@gmail.com";
     };
+    pull.rebase = false;
   };
 }
