@@ -38,5 +38,5 @@ let
   };
 in
 {
-  home.systemPackages = [ serverui ];
+  home.packages = [ serverui ];
 }
