@@ -34,7 +34,7 @@ let
       runHook postInstall
     '';
 
-    meta.mainProgram = "serverui-desktop";
+    meta.mainProgram = "serverui";
   };
 in
 {
