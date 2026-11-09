@@ -14,6 +14,7 @@
     ./firefox.nix
     ./spicetify.nix
     ./conky/conky.nix
+    ./default-apps.nix
     #./qt.nix
 
     #./wms/hyprlan/hyprland.nix
