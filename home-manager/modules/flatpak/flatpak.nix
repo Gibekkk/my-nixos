@@ -10,6 +10,7 @@ in {
     packages = [
       "org.vinegarhq.Sober"
       "com.github.tchx84.Flatseal"
+      "org.gnome.NetworkDisplays"
       artcraft
     ];
   };

@@ -7,7 +7,7 @@
 
   environment.systemPackages = with pkgs; [
     # Desktop apps
-    gnome-network-displays
+#     gnome-network-displays
 
     #alacritty
     rofi
