@@ -32,5 +32,6 @@
 
     # Games
     protonplus
+    (pkgs.callPackage ../packages/nix/sklauncher.nix { })
   ];
 }
