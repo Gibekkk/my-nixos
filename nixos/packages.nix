@@ -94,6 +94,9 @@
     spice-vdagent
     papirus-nord
     wine
+    pciutils
+    iw
+    usbutils
   ];
 
   hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
