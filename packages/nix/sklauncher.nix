@@ -1,5 +1,5 @@
 { lib, stdenv, fetchurl, dpkg, autoPatchelfHook, makeWrapper
-, wrapGAppsHook3, gtk3, nss, libnotify, libxss, libxtst, xdg-utils
+, wrapGAppsHook3, gtk3, nss, libnotify, libxscrnsaver, libxtst, xdg-utils
 , at-spi2-atk, libuuid, libsecret, alsa-lib, mesa, libgbm, libdrm
 , cups, libxkbcommon, pango, cairo, xorg, libGL, vulkan-loader, systemd, jdk17 }:
 
@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [ dpkg autoPatchelfHook makeWrapper wrapGAppsHook3 ];
   buildInputs = [
-    gtk3 nss libnotify libxss libxtst at-spi2-atk libuuid libsecret
+    gtk3 nss libnotify libxscrnsaver libxtst at-spi2-atk libuuid libsecret
     alsa-lib mesa libgbm libdrm cups libxkbcommon pango cairo
     xorg.libX11 xorg.libXcomposite xorg.libXdamage xorg.libXext
     xorg.libXfixes xorg.libXrandr xorg.libxcb
