@@ -25,5 +25,6 @@
     ./flatpak.nix
     ./steam.nix
     ./nix-ld.nix
+    ./dolphin.nix
   ];
 }
