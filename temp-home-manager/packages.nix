@@ -4,7 +4,8 @@
   home.packages = with pkgs; [
     # Desktop apps
     telegram-desktop
-    vscode
+    #vscode
+    vscodium
     pkgs-unstable.obsidian
     zoom-us
     inputs.zapfast.packages.${system}.default
