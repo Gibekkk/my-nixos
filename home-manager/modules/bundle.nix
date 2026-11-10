@@ -1,6 +1,5 @@
 {
   imports = [
-    ./serverui.nix
     ./autostart.nix
     ./cursor.nix
     ./git.nix
@@ -15,7 +14,7 @@
     ./firefox.nix
     ./spicetify.nix
     ./conky/conky.nix
-    ./default-apps.nix
+    ./dolphin.nix
     #./qt.nix
 
     #./wms/hyprlan/hyprland.nix
