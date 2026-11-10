@@ -3,6 +3,7 @@
     ./fish.nix
     ./modules/bundle.nix
     ./packages.nix
+    ./flatpak/flatpak.nix
   ];
 
   home = {
