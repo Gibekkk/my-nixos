@@ -6,6 +6,14 @@
   };
 in {
   services.flatpak = {
+    remotes = [{
+        name = "flathub";
+        location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+        }];
+
+    update.onActivation = false;
+    uninstallUnmanaged = true;
+
     packages = [
       "org.vinegarhq.Sober"
       "com.github.tchx84.Flatseal"
