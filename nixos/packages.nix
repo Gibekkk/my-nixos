@@ -28,6 +28,7 @@
     gcc
     nodejs
     (python3.withPackages (ps: with ps; [ requests ]))
+    opencode
 
     # CLI utils
     xsel
