@@ -6,7 +6,7 @@
         }];
 
     update.onActivation = false;
-    uninstallUnmanaged = true;
+    uninstallUnmanaged = false;
 
     packages = [
       
