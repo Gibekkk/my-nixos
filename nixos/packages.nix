@@ -92,6 +92,7 @@
     home-manager
     spice-vdagent
     papirus-nord
+    wine
   ];
 
   hardware.graphics.extraPackages = [ pkgs.rocmPackages.clr.icd ];
