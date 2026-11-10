@@ -15,7 +15,6 @@
     ./spicetify.nix
     ./conky/conky.nix
     ./dolphin.nix
-    ./flatpak/flatpak.nix
     #./qt.nix
 
     #./wms/hyprlan/hyprland.nix
