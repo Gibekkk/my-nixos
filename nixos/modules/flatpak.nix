@@ -8,7 +8,7 @@
         }];
 
         update.onActivation = false;
-        uninstallUnmanaged = true;
+        uninstallUnmanaged = false;
     };
 
     fonts.fontDir.enable = true;
