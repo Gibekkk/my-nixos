@@ -1,7 +1,7 @@
-{ lib, stdenv, fetchurl, dpkg, autoPatchelfHook, makeWrapper
+{ lib, stdenv, fetchurl, dpkg, autoPatchelfHook, makeWrapper, pkgs
 , wrapGAppsHook3, gtk3, nss, libnotify, libxscrnsaver, libxtst, xdg-utils
 , at-spi2-atk, libuuid, libsecret, alsa-lib, mesa, libgbm, libdrm
-, cups, libxkbcommon, pango, cairo, xorg, libGL, vulkan-loader, systemd, jdk17 }:
+, cups, libxkbcommon, pango, cairo, libGL, vulkan-loader, systemd, jdk17 }:
 
 stdenv.mkDerivation rec {
   pname = "sklauncher";
@@ -16,8 +16,8 @@ stdenv.mkDerivation rec {
   buildInputs = [
     gtk3 nss libnotify libxscrnsaver libxtst at-spi2-atk libuuid libsecret
     alsa-lib mesa libgbm libdrm cups libxkbcommon pango cairo
-   xorg. libX11 xorg.libXcomposite xorg.libXdamage xorg.libXext
-    xorg.libXfixes xorg.libXrandr xorg.libxcb
+   pkgs. libX11 pkgs.libXcomposite pkgs.libXdamage pkgs.libXext
+    pkgs.libXfixes pkgs.libXrandr pkgs.libxcb
   ];
 
   unpackPhase = "dpkg-deb -x $src .";
