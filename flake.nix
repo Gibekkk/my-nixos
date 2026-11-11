@@ -44,6 +44,21 @@
 
     let
       system = "x86_64-linux";
+      homeManagerConfig = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.${system};
+      extraSpecialArgs = {
+        pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config.allowUnfree = true;
+        };
+        inherit inputs system;
+      };
+      modules = [
+      inputs.plasma-manager.homeModules.plasma-manager
+      nix-flatpak.homeManagerModules.nix-flatpak
+      ./home-manager/home.nix
+      ];
+    };
     in {
 
     # Gibekkk - system hostname
@@ -62,23 +77,9 @@
     };
 
     # gibekkk - username
-    homeConfigurations.gibekkk = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
-      extraSpecialArgs = {
-        pkgs-unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-        };
-        inherit inputs system;
-      };
-      modules = [
-      inputs.plasma-manager.homeModules.plasma-manager
-      nix-flatpak.homeManagerModules.nix-flatpak
-      ./home-manager/home.nix
-      ];
-    };
+    homeConfigurations.gibekkk = homeManagerConfig;
 
     # gibets - username
-    homeConfigurations.gibets = homeConfigurations.gibekkk;
+    homeConfigurations.gibets = homeManagerConfig;
   };
 }
