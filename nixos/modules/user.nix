@@ -13,7 +13,7 @@
 
     users.gibets = {
       isNormalUser = true;
-      description = "Gilbert Temporary";
+      description = "Guest";
       extraGroups = [ "networkmanager" "input" "libvirtd" ];
       packages = with pkgs; [];
     };
