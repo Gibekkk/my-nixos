@@ -10,7 +10,6 @@
   networking.extraHosts = ''
     100.105.193.52 bobian
     100.116.34.120 rudos
-    100.118.106.119 server-alim
     100.84.145.118 syariati
   '';
 

@@ -10,7 +10,9 @@ in {
       upd   = "nix flake update --flake ${flakeDir}";
       conf  = "nvim ${flakeDir}/nixos/configuration.nix";
       ff    = "fastfetch";
-      clean = "sudo nix-collect-garbage -d";
+      sclean = "sudo nix-collect-garbage -d";
+      hclean = "nix-env -p ~/.local/state/nix/profiles/home-manager --delete-generations old";
+      clean = "sclean && hclean";
       fnix  = "cd ~/../shared/nix";
     };
     functions.fish_greeting = ''

@@ -79,20 +79,6 @@
     };
 
     # gibets - username
-    homeConfigurations.gibets = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
-      extraSpecialArgs = {
-        pkgs-unstable = import nixpkgs-unstable {
-            inherit system;
-            config.allowUnfree = true;
-        };
-        inherit inputs system;
-      };
-      modules = [
-      inputs.plasma-manager.homeModules.plasma-manager
-      nix-flatpak.homeManagerModules.nix-flatpak
-      ./temp-home-manager/home.nix
-      ];
-    };
+    homeConfigurations.gibets = homeConfigurations.gibekkk;
   };
 }
