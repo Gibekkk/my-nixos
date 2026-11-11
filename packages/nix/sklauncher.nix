@@ -1,7 +1,9 @@
-{ lib, stdenv, fetchurl, dpkg, autoPatchelfHook, makeWrapper, pkgs
+{ lib, stdenv, fetchurl, dpkg, autoPatchelfHook, makeWrapper
 , wrapGAppsHook3, gtk3, nss, libnotify, libxscrnsaver, libxtst, xdg-utils
 , at-spi2-atk, libuuid, libsecret, alsa-lib, mesa, libgbm, libdrm
-, cups, libxkbcommon, pango, cairo, libGL, vulkan-loader, systemd, jdk17 }:
+, cups, libxkbcommon, pango, cairo
+, libx11, libxcomposite, libxdamage, libxext, libxfixes, libxrandr, libxcb
+, libGL, vulkan-loader, systemd, jdk17 }:
 
 stdenv.mkDerivation rec {
   pname = "sklauncher";
