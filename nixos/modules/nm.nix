@@ -1,9 +1,14 @@
-{
+{ pkgs, inputs, ... }:
+let
+  old = inputs.nixpkgs-2511.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in {
   networking.networkmanager.enable = true;
-
-  # Removes udev rule that restarts wpa_supplicant on every Wi-Fi device event.
-  # Breaks Miracast (gnome-network-displays) P2P discovery and pairing.
   networking.wireless.interfaces = [ "wlo1" ];
+
+  # Test: older wpa_supplicant. Revert after.
+  nixpkgs.overlays = [
+    (final: prev: { wpa_supplicant = old.wpa_supplicant; })
+  ];
 
   networking.firewall = {
     allowedTCPPorts = [ 7236 7250 ];
