@@ -12,15 +12,15 @@
       udev
       flite
       libxkbcommon
-      xorg.libX11
-      xorg.libXcursor
-      xorg.libXext
-      xorg.libXrandr
-      xorg.libXxf86vm
-      xorg.libXi
-      xorg.libXrender
-      xorg.libXtst
-      xorg.libXinerama
+      libx11
+      libxcursor
+      libxext
+      libxrandr
+      libxxf86vm
+      libxi
+      libxrender
+      libxtst
+      libxinerama
       freetype
       fontconfig
     ];
