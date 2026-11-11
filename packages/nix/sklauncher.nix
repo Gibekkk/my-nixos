@@ -16,8 +16,8 @@ stdenv.mkDerivation rec {
   buildInputs = [
     gtk3 nss libnotify libxscrnsaver libxtst at-spi2-atk libuuid libsecret
     alsa-lib mesa libgbm libdrm cups libxkbcommon pango cairo
-   pkgs. libX11 pkgs.libXcomposite pkgs.libXdamage pkgs.libXext
-    pkgs.libXfixes pkgs.libXrandr pkgs.libxcb
+    libx11 libxcomposite libxdamage libxext
+    libxfixes libxrandr libxcb
   ];
 
   unpackPhase = "dpkg-deb -x $src .";
