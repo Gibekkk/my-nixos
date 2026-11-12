@@ -2,6 +2,7 @@
   imports = [
     ./filesystem.nix
     ./sshmode.nix
+    ./ssh.nix # authorized keys
     ./virtualbox.nix
     ./bootloader.nix
     ./sound.nix
