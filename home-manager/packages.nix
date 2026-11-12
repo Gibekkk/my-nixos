@@ -9,7 +9,7 @@
     pkgs-unstable.obsidian
     zoom-us
     inputs.zapfast.packages.${system}.default
-    github-desktop
+    # github-desktop: installed system-wide (nixos/packages.nix, patched for sign-in)
     vesktop
     virtualbox
     godot
