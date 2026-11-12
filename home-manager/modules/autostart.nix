@@ -1,18 +1,9 @@
-{ config, ... }: {
-  # ZapFast starts hidden in the tray at login.
-  # force: replaces the autostart file ZapFast writes itself when its
-  # "start at login" switch is used (it hardcodes a store path).
-  xdg.configFile."autostart/zapfast.desktop" = {
-    force = true;
-    text = ''
-      [Desktop Entry]
-      Type=Application
-      Name=ZapFast
-      Exec=${config.programs.zapfast.package}/bin/zapfast --start-hidden
-      Icon=zapfast
-      Terminal=false
-      X-GNOME-Autostart-enabled=true
-      X-KDE-autostart-after=panel
-    '';
-  };
+{
+  # Login autostart entries.
+  #
+  # ZapFast is not listed here on purpose: enable it in ZapFast itself
+  # (Settings -> "Start at login"). The app registers itself through the
+  # desktop's Background portal, which writes ~/.config/autostart/zapfast.desktop
+  # with --start-hidden. A home-manager entry would overwrite that file and
+  # make the in-app switch stop working.
 }

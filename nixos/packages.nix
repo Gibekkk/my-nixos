@@ -7,7 +7,7 @@
 
   environment.systemPackages = with pkgs; [
     # Desktop apps
-#     gnome-network-displays
+    gnome-network-displays # Miracast; P2P/firewall setup in modules/nm.nix
 
     #alacritty
     rofi

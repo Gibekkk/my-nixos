@@ -60,9 +60,11 @@ let
     swapSubMetrics = "percent,used";
     swapVisibility = "both";
     tempEnabled = true;
-    tempLabel = "System";
+    tempLabel = "CPU";
     tempVisibility = "both";
-    tempSensor = "auto";
+    # "auto" picks an ACPI zone that is stuck at 25 °C on this HP;
+    # use the CPU package temperature from KSystemStats instead.
+    tempSensor = "cpu/all/averageTemperature";
     tempSelection = "";
     tempLabels = "";
     gpuEnabled = true;
