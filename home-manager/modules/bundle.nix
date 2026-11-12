@@ -19,8 +19,5 @@
     ./node.nix
     #./qt.nix
 
-    #./wms/hyprlan/hyprland.nix
-    #./wms/caelestia.nix
-    #./wms/waybar.nix
   ];
 }

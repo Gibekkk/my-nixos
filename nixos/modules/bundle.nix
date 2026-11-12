@@ -12,12 +12,10 @@
     #./xserver.nix
     ./nm.nix
     ./virtmanager.nix
-    #./hyprland.nix
     ./trim.nix
     ./bluetooth.nix
     ./tailscale.nix
     ./neovim.nix
-    #./greetd.nix
     ./xdg.nix
     ./plasma.nix
     ./scripts.nix

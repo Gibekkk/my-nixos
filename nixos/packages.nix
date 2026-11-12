@@ -55,8 +55,6 @@ in
     gnome-network-displays # Miracast; P2P/firewall setup in modules/nm.nix
 
     #alacritty
-    rofi
-    wofi
     mpv
     kdePackages.kdenlive
     kdePackages.dolphin
@@ -115,8 +113,6 @@ in
 
     # Wayland
     wl-clipboard
-    cliphist
-    #hyprpaper
 
     # Sound
     pamixer
@@ -128,10 +124,6 @@ in
     pascube
 
     # Screenshots
-    grim
-    grimblast
-    slurp
-    swappy
     flameshot
 
     # Other

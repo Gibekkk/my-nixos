@@ -15,11 +15,6 @@
       url = "github:gmodena/nix-flatpak";
     };
 
-#     caelestia = {
-#       url = "github:caelestia-dots/shell";
-#       inputs.nixpkgs.follows = "nixpkgs";
-#     };
-
     zapfast = {
       url = "github:crmne/zapfast";
     };
