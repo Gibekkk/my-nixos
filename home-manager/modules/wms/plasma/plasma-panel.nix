@@ -40,6 +40,10 @@ let
     hash = "sha256-gDPh/ABuu4xGdsAunOyiUK64816QxSGxWyqwUe3aXT0=";
   };
 
+  # SSH Mode widget (local, ./sshmode-widget): shows `sshmode status`,
+  # click opens sshmode-gui. Both come from nixos/modules/sshmode.nix.
+  sshmodeId = "org.gibekkk.sshmode";
+
   # KVitals profile, copied from the live config (appletsrc) after tuning
   kvitalsProfileId = "c2538c5a-bbbd-4342-9804-10346294af62";
   kvitalsData = {
@@ -155,11 +159,12 @@ let
   };
 in
 {
-  # Install the two KDE Store widgets where Plasma looks for user plasmoids
+  # Install the KDE Store widgets (and the local SSH Mode one) where Plasma looks for user plasmoids
   xdg.dataFile."plasma/plasmoids/${kvitalsId}".source =
     "${kvitals}/share/plasma/plasmoids/${kvitalsId}";
   xdg.dataFile."plasma/plasmoids/${indicatorId}".source =
     "${desktopIndicator}/share/plasma/plasmoids/${indicatorId}";
+  xdg.dataFile."plasma/plasmoids/${sshmodeId}".source = ./sshmode-widget;
 
   programs.plasma.panels = [
     {
@@ -226,6 +231,9 @@ in
         }
 
         "org.kde.plasma.marginsseparator"
+
+        # SSH server mode (click to change)
+        sshmodeId
 
         # System tray with Plasma's default set of items
         "org.kde.plasma.systemtray"
