@@ -20,6 +20,10 @@ in {
       "org.vinegarhq.Sober"
       "com.github.tchx84.Flatseal"
       "org.gnome.NetworkDisplays"
+      # H.264 encoder (x264enc) for NetworkDisplays. Must match the
+      # freedesktop base of its runtime (GNOME 49 = 25.08); without it
+      # Miracast asks for a missing codec plugin.
+      "org.freedesktop.Platform.codecs-extra//25.08-extra"
       artcraft
     ];
   };

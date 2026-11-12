@@ -1,0 +1,14 @@
+{
+  "KPlugin": {
+    "Id": "org.gibekkk.sshmode",
+    "Name": "SSH Mode",
+    "Description": "Shows how the SSH server is exposed; click to change the mode",
+    "Icon": "network-server",
+    "Authors": [ { "Name": "Gibekkk" } ],
+    "Category": "System Information",
+    "License": "MIT",
+    "Version": "1.0"
+  },
+  "KPackageStructure": "Plasma/Applet",
+  "X-Plasma-API-Minimum-Version": "6.0"
+}
