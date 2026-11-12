@@ -53,7 +53,7 @@ in
   environment.systemPackages = with pkgs; [
     # Desktop apps
     gnome-network-displays # Miracast; P2P/firewall setup in modules/nm.nix
-    kdePackages.kamera
+    kdePackages.kamoso
 
     #alacritty
     mpv
