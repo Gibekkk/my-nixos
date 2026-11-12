@@ -1,6 +1,7 @@
 {
   imports = [
     ./autostart.nix
+    ./default-apps.nix
     ./cursor.nix
     ./git.nix
     ./htop.nix

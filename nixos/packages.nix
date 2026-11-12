@@ -66,7 +66,14 @@
     # GUI utils
     feh
     imv
-    mako
+    # mako for Hyprland, without its D-Bus autostart file: otherwise D-Bus
+    # starts mako whenever plasmashell restarts and it steals Plasma's
+    # notifications (org.freedesktop.Notifications) for the rest of the session.
+    (mako.overrideAttrs (old: {
+      postInstall = (old.postInstall or "") + ''
+        rm -f $out/share/dbus-1/services/fr.emersion.mako.service
+      '';
+    }))
     pavucontrol
 
     # Wayland

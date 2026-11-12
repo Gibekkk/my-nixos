@@ -32,6 +32,10 @@ let
   ];
 in
 {
+  # Replace the hand-made ~/.config/mimeapps.list (it lacked the GitHub
+  # Desktop sign-in handler) instead of failing on the existing file.
+  xdg.configFile."mimeapps.list".force = true;
+
   xdg.mimeApps = {
     enable = true;
     defaultApplications =
