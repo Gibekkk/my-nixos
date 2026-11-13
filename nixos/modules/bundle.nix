@@ -1,6 +1,7 @@
 {
   imports = [
     ./filesystem.nix
+    ./appimage.nix
     ./sshmode.nix
     ./ssh.nix # authorized keys
     ./virtualbox.nix
