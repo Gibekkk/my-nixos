@@ -3,7 +3,7 @@
     ./filesystem.nix
     ./appimage.nix
     ./sshmode.nix
-    ./dconf.nix
+    #./dconf.nix
     ./ssh.nix # authorized keys
     ./virtualbox.nix
     ./bootloader.nix
