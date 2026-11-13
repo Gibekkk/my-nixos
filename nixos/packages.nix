@@ -73,6 +73,7 @@ in
     nodejs
     (python3.withPackages (ps: with ps; [ requests ]))
     opencode
+    electron
 
     # CLI utils
     xsel
