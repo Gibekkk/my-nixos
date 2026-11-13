@@ -1,4 +1,4 @@
-{ pkgs, pkgs-unstable, inputs, system, ... }: {
+{ lib, pkgs, pkgs-unstable, inputs, system, ... }: {
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowInsecurePredicate = pkg: builtins.elem (lib.getName pkg) [
     "pnpm"
