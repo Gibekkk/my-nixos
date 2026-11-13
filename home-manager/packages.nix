@@ -13,6 +13,8 @@
     vesktop
     virtualbox
     godot
+    nur.repos.mio.futo-notes
+
 
     # Coding
 
