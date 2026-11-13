@@ -6,7 +6,7 @@
     telegram-desktop
     #vscode
     vscodium
-    pkgs-unstable.obsidian
+    #pkgs-unstable.obsidian
     zoom-us
     inputs.zapfast.packages.${system}.default
     # github-desktop: installed system-wide (nixos/packages.nix, patched for sign-in)
