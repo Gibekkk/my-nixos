@@ -14,7 +14,7 @@ in {
         }];
 
     update.onActivation = false;
-    uninstallUnmanaged = true;
+    uninstallUnmanaged = false;
 
     packages = [
       "org.vinegarhq.Sober"

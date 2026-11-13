@@ -17,10 +17,15 @@
 
   # These portals have Restart=no upstream: one crash and file dialogs,
   # screen sharing and app autostart requests stay broken until re-login.
-  systemd.user.services = lib.genAttrs [ "xdg-desktop-portal" "plasma-xdg-desktop-portal-kde" ] (_: {
-    serviceConfig = {
+#   systemd.user.services = lib.genAttrs [ "xdg-desktop-portal" "plasma-xdg-desktop-portal-kde" ] (_: {
+#     serviceConfig = {
+#       Restart = "on-failure";
+#       RestartSec = 2;
+#     };
+#   });
+
+    systemd.user.services.xdg-desktop-portal.serviceConfig = {
       Restart = "on-failure";
       RestartSec = 2;
     };
-  });
 }
