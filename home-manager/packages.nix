@@ -1,5 +1,8 @@
 { pkgs, pkgs-unstable, inputs, system, ... }: {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowInsecurePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "pnpm"
+  ];
 
   home.packages = with pkgs; [
     # Desktop apps

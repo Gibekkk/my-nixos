@@ -8,7 +8,7 @@ let
   };
 
   # Global npm packages. Edit here.
-  nodeGlobals = [ "typescript" "yarn" "yoinks" ];
+  nodeGlobals = [ "typescript" "yarn" "pnpm" "yoinks" ];
 
   setup = pkgs.writeText "node-setup.fish" ''
     set -g nvm_default_packages ${lib.concatStringsSep " " nodeGlobals}
