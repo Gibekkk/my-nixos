@@ -40,7 +40,7 @@
     };
 };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, disko, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nix-flatpak, disko, nur, ... }@inputs:
 
     let
       system = "x86_64-linux";
@@ -57,6 +57,7 @@
       inputs.plasma-manager.homeModules.plasma-manager
       nix-flatpak.homeManagerModules.nix-flatpak
       ./home-manager/home.nix
+      nur.modules.homeManager.default
       ];
     };
     in {
@@ -73,6 +74,7 @@
       modules = [
         nix-flatpak.nixosModules.nix-flatpak
         ./nixos/configuration.nix
+        nur.modules.nixos.default
       ];
     };
 
