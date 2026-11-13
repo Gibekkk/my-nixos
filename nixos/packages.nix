@@ -131,7 +131,8 @@ in
     home-manager
     spice-vdagent
     papirus-nord
-    wine
+    wineWow64Packages.stable
+    winetricks
     pciutils
     iw
     usbutils
