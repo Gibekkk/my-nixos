@@ -3,6 +3,7 @@
     ./filesystem.nix
     ./appimage.nix
     ./sshmode.nix
+    ./mariadb.nix
     #./dconf.nix
     ./ssh.nix # authorized keys
     ./virtualbox.nix
