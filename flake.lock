@@ -146,14 +146,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1794557514,
-        "narHash": "sha256-TedezJL62BcCXYD60XosAeA78kXNU9x5Pw9n0yrh/v0=",
-        "type": "tarball",
-        "url": "https://github.com/nix-community/NUR/archive/refs/heads/main.tar.gz"
+        "lastModified": 1794796670,
+        "narHash": "sha256-k7xrmGc+TX9cD/429rnmPiDvlgFs6DnBC4QboCpUF8g=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "3fe9094e647d34d437e4e3529bbfc21ff607a7c7",
+        "type": "github"
       },
       "original": {
-        "type": "tarball",
-        "url": "https://github.com/nix-community/NUR/archive/refs/heads/main.tar.gz"
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
       }
     },
     "plasma-manager": {
