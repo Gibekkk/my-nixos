@@ -1,4 +1,9 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }:
+let
+  dbUser = "gibekkk";
+  dbPass = "CHANGE_ME";   # temporary. Visible in the Nix store, so change it later
+  mysql = "${config.services.mysql.package}/bin/mysql --socket=/run/mysqld/mysqld.sock";
+in {
   services.mysql = {
     enable = true;
     package = pkgs.mariadb;
@@ -8,13 +13,30 @@
       port = 3306;
     };
 
-    ensureDatabases = [  ];
+    ensureDatabases = [ "appdb" ];
+  };
 
-    # Linux user gibekkk gets full rights, no password, over the local socket.
-    ensureUsers = [{
-      name = "gibekkk";
-      ensurePermissions = { "*.*" = "ALL PRIVILEGES"; };
-    }];
+  # Idempotent: creates or updates both accounts, full rights.
+  systemd.services.mysql-user-access = {
+    description = "MariaDB accounts for ${dbUser}";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "mysql.service" ];
+    requires = [ "mysql.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      ${mysql} <<'SQL'
+      CREATE USER IF NOT EXISTS '${dbUser}'@'localhost' IDENTIFIED VIA unix_socket;
+      ALTER USER '${dbUser}'@'localhost' IDENTIFIED VIA unix_socket OR mysql_native_password USING PASSWORD('${dbPass}');
+      CREATE USER IF NOT EXISTS '${dbUser}'@'127.0.0.1' IDENTIFIED BY '${dbPass}';
+      ALTER USER '${dbUser}'@'127.0.0.1' IDENTIFIED BY '${dbPass}';
+      GRANT ALL PRIVILEGES ON *.* TO '${dbUser}'@'localhost' WITH GRANT OPTION;
+      GRANT ALL PRIVILEGES ON *.* TO '${dbUser}'@'127.0.0.1' WITH GRANT OPTION;
+      FLUSH PRIVILEGES;
+      SQL
+    '';
   };
 
   # phpMyAdmin container on http://localhost:8081
