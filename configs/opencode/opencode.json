@@ -1,16 +1,17 @@
 {
+  "$schema": "https://opencode.ai/config.json",
   "permission": {
     "bash": {
-      "git *": "allow"
+      "git *": "deny"
     }
   },
-  "$schema": "https://opencode.ai/config.json",
-  "providers": {
-    "ai 5090 lt5": {
-      "package": "@opencode/ai/providers/openai-compatible",
-      "settings": {
+  "provider": {
+    "ai5090lt5": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "ai 5090 lt5",
+      "options": {
         "baseURL": "https://ai-chat.imtlt5ucm.dpdns.org/api",
-        "apiKey": "sk-e"
+        "apiKey": "YOUR_KEY_HERE"
       },
       "models": {
         "qwen/qwen3.6-35b-a3b": {
@@ -18,7 +19,7 @@
         },
         "qwen/qwen3.8-27b": {
           "name": "qwen3.8-27b"
-    }
+        }
       }
     }
   }
