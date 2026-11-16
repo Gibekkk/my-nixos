@@ -7,7 +7,7 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nur ={
-     url = "https://github.com/nix-community/NUR/archive/refs/heads/main.tar.gz";
+     url = "github:nix-community/NUR";
      inputs.nixpkgs.follows = "nixpkgs";
     };
 
