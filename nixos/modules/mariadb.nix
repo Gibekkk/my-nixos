@@ -27,12 +27,18 @@ in {
       RemainAfterExit = true;
     };
     script = ''
-      ${mysql} <<'SQL'
-      CREATE USER IF NOT EXISTS '${dbUser}'@'localhost' IDENTIFIED BY '${dbPass}';
-      ALTER USER '${dbUser}'@'localhost' IDENTIFIED BY '${dbPass}';
+      exists=$(${mysql} -N -B -e "SELECT COUNT(*) FROM mysql.user WHERE User='${dbUser}' AND Host='localhost';")
+
+      if [ "$exists" = "0" ]; then
+        echo "Creating MariaDB account ${dbUser}"
+        ${mysql} <<'SQL'
+      CREATE USER '${dbUser}'@'localhost' IDENTIFIED BY '${dbPass}';
       GRANT ALL PRIVILEGES ON *.* TO '${dbUser}'@'localhost' WITH GRANT OPTION;
       FLUSH PRIVILEGES;
       SQL
+      else
+        echo "MariaDB account ${dbUser} already exists, leaving it alone"
+      fi
     '';
   };
 
