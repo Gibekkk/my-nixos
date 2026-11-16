@@ -146,17 +146,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1794796670,
-        "narHash": "sha256-k7xrmGc+TX9cD/429rnmPiDvlgFs6DnBC4QboCpUF8g=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "3fe9094e647d34d437e4e3529bbfc21ff607a7c7",
-        "type": "github"
+        "lastModified": 1794798986,
+        "narHash": "sha256-cMnLIbiqkBi+vOso0mbxI0rjqwV9BFjgKqbaEkvWcWg=",
+        "ref": "refs/heads/main",
+        "rev": "16dd36bb38cefe73d9c0c519bda65fdca7b6cfb5",
+        "revCount": 54530,
+        "type": "git",
+        "url": "https://github.com/nix-community/NUR"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "type": "github"
+        "type": "git",
+        "url": "https://github.com/nix-community/NUR"
       }
     },
     "plasma-manager": {
