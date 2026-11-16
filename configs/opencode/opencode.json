@@ -1,0 +1,25 @@
+{
+  "permission": {
+    "bash": {
+      "git *": "allow"
+    }
+  },
+  "$schema": "https://opencode.ai/config.json",
+  "providers": {
+    "ai 5090 lt5": {
+      "package": "@opencode/ai/providers/openai-compatible",
+      "settings": {
+        "baseURL": "https://ai-chat.imtlt5ucm.dpdns.org/api",
+        "apiKey": "sk-e"
+      },
+      "models": {
+        "qwen/qwen3.6-35b-a3b": {
+          "name": "qwen3.6-35b-a3b"
+        },
+        "qwen/qwen3.8-27b": {
+          "name": "qwen3.8-27b"
+    }
+      }
+    }
+  }
+}
