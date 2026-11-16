@@ -28,11 +28,8 @@ in {
     };
     script = ''
       ${mysql} <<'SQL'
-      CREATE USER IF NOT EXISTS '${dbUser}'@'localhost' IDENTIFIED VIA unix_socket;
-      ALTER USER '${dbUser}'@'localhost' IDENTIFIED VIA unix_socket OR mysql_native_password USING PASSWORD('${dbPass}');
       CREATE USER IF NOT EXISTS '${dbUser}'@'127.0.0.1' IDENTIFIED BY '${dbPass}';
       ALTER USER '${dbUser}'@'127.0.0.1' IDENTIFIED BY '${dbPass}';
-      GRANT ALL PRIVILEGES ON *.* TO '${dbUser}'@'localhost' WITH GRANT OPTION;
       GRANT ALL PRIVILEGES ON *.* TO '${dbUser}'@'127.0.0.1' WITH GRANT OPTION;
       FLUSH PRIVILEGES;
       SQL
