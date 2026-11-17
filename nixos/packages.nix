@@ -77,6 +77,7 @@ in
 
     # CLI utils
     xsel
+    net-tools
     glib
     xclip
     fastfetch
