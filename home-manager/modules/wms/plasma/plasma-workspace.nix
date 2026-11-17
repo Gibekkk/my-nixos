@@ -5,7 +5,7 @@
         (sleep 2; dbus-send --session --dest=org.kde.KWin --type=method_call /KWin org.kde.KWin.setCurrentDesktop int32:1) &
       '';
       runAlways = true;
-      priority = 9;
+      priority = 8;
     };
 
     workspace = {
