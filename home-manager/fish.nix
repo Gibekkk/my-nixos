@@ -14,8 +14,9 @@ in {
       hclean = "nix-env -p ~/.local/state/nix/profiles/home-manager --delete-generations old";
       clean = "sclean && hclean";
       fnix  = "cd ~/../shared/nix";
-      diseth = "nmcli connection modify 'Wired connection 1' ipv4.never-default yes ipv6.never-default yes &&  nmcli connection up 'Wired connection 1'";
-      eneth = "nmcli connection modify 'Wired connection 1' ipv4.never-default no ipv6.never-default no &&  nmcli connection up 'Wired connection 1'";
+      diseth = "nmcli connection modify 'Wired connection 1' ipv4.never-default yes ipv6.never-default yes";
+      eneth = "nmcli connection modify 'Wired connection 1' ipv4.never-default no ipv6.never-default no";
+      reseth = "nmcli connection up 'Wired connection 1'";
     };
     functions.fish_greeting = ''
       echo "Welcome back, $USER" | lolcat
