@@ -17,6 +17,7 @@
     virtualbox
     godot
     nur.repos.mio.futo-notes
+    winbox
 
 
     # Coding
