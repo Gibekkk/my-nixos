@@ -1,0 +1,27 @@
+{
+  description = "temp shell example";
+
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nur ={
+     url = "git+https://github.com/nix-community/NUR";
+     inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+  outputs = { self, nixpkgs }:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
+    {
+      devShells.${system}.default = pkgs.mkShell {
+        packages = [
+          pkgs.winbox4
+        ];
+      };
+    };
+}
