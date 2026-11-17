@@ -1,6 +1,6 @@
 {
   description = "temp shell example";
-
+  inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -8,6 +8,7 @@
      url = "git+https://github.com/nix-community/NUR";
      inputs.nixpkgs.follows = "nixpkgs";
     };
+  }
 
   outputs = { self, nixpkgs }:
     let
