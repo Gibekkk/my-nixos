@@ -1,9 +1,29 @@
+{ config, ... }:
+let
+  mkAutostart = name: displayName: exec: {
+    "autostart/${name}.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=${displayName}
+      Exec=${exec}
+      Icon=${name}
+      Terminal=false
+      StartupNotify=false
+      X-GNOME-Autostart-enabled=true
+    '';
+  };
+in
 {
-  # Login autostart entries.
+  # Login autostart entries, managed here instead of by the apps.
   #
-  # ZapFast is not listed here on purpose: enable it in ZapFast itself
-  # (Settings -> "Start at login"). The app registers itself through the
-  # desktop's Background portal, which writes ~/.config/autostart/zapfast.desktop
-  # with --start-hidden. A home-manager entry would overwrite that file and
-  # make the in-app switch stop working.
+  # The in-app "Start at login" switches (ZapFast, Vesktop) wrote entries that
+  # ran the unwrapped binary from a fixed /nix/store path. Without the Nix
+  # wrapper ZapFast crashed with NoWaylandLib as soon as its window opened,
+  # Vesktop crashed on start, and the paths broke after an update + GC.
+  # These entries go through the wrapped binaries of the home-manager packages.
+  #
+  # Leave the in-app switches alone: to stop an app autostarting, remove it here.
+  xdg.configFile =
+    mkAutostart "zapfast" "ZapFast" "${config.programs.zapfast.package}/bin/zapfast --start-hidden"
+    // mkAutostart "vesktop" "Vesktop" "${config.programs.vesktop.package}/bin/vesktop";
 }

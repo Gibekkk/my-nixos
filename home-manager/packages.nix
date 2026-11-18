@@ -11,7 +11,7 @@
     vscodium
     #pkgs-unstable.obsidian
     zoom-us
-    inputs.zapfast.packages.${system}.default
+    # zapfast: installed by programs.zapfast (modules/zapfast.nix)
     # github-desktop: installed system-wide (nixos/packages.nix, patched for sign-in)
     vesktop
     virtualbox

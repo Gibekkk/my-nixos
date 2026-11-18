@@ -31,11 +31,21 @@ in
     };
 
     systemd.sockets.sshd = {
-      after = [ "tailscaled.service" ];
+      # The socket must start after tailscaled (BindToDevice needs tailscale0),
+      # but a default socket unit is ordered before sockets.target, which comes
+      # before every normal service. That is an ordering cycle, and systemd
+      # resolves it by dropping the sshd.socket start job, so SSH stayed off
+      # after every boot. Drop the default dependencies, re-add the ones that
+      # matter, and start the socket with multi-user.target instead.
+      unitConfig.DefaultDependencies = false;
+      requires = [ "sysinit.target" ];
+      after = [ "sysinit.target" "tailscaled.service" ];
+      before = [ "shutdown.target" ];
+      conflicts = [ "shutdown.target" ];
       partOf = [ "tailscaled.service" ];
-      # boot default
+      # boot default; also comes back whenever tailscaled is started again
       socketConfig = lib.mkIf (cfg.default == "tailscale") { BindToDevice = "tailscale0"; };
-      wantedBy = lib.mkIf (cfg.default == "off") (lib.mkForce [ ]);
+      wantedBy = lib.mkForce (if cfg.default == "off" then [ ] else [ "multi-user.target" "tailscaled.service" ]);
     };
 
     environment.etc."sshmode/default".text = cfg.default;
