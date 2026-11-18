@@ -13,6 +13,19 @@
       colorScheme = "BreezeDark";
     };
 
+    # Laptop touchpad (IDs from /proc/bus/input/devices, in hex).
+    input.touchpads = [
+      {
+        name = "SynPS/2 Synaptics TouchPad";
+        vendorId = "0002";
+        productId = "0007";
+        naturalScroll = true;
+      }
+    ];
+
+    # Shortcuts with Shift + a number key must be written with the symbol that
+    # Shift produces (US layout: 1-5 -> ! @ # $ %). KWin treats Shift as used up
+    # by the symbol, so "Meta+Shift+1" never matches; "Meta+!" is the same keys.
     shortcuts = {
       "KDE Keyboard Layout Switcher"."Switch to Last-Used Keyboard Layout" = [ ];
       "KDE Keyboard Layout Switcher"."Switch to Next Keyboard Layout" = [ ];
@@ -158,7 +171,7 @@
       kwin."Window Resize" = [ ];
       kwin."Window Shrink Horizontal" = [ ];
       kwin."Window Shrink Vertical" = [ ];
-      kwin."Window to Desktop 1" = [ "Meta+Shift+1"  ];
+      kwin."Window to Desktop 1" = [ "Meta+!" ];  # Meta+Shift+1
       kwin."Window to Desktop 10" = [ ];
       kwin."Window to Desktop 11" = [ ];
       kwin."Window to Desktop 12" = [ ];
@@ -169,16 +182,16 @@
       kwin."Window to Desktop 17" = [ ];
       kwin."Window to Desktop 18" = [ ];
       kwin."Window to Desktop 19" = [ ];
-      kwin."Window to Desktop 2" = [ "Meta+Shift+2"  ];
+      kwin."Window to Desktop 2" = [ "Meta+@" ];  # Meta+Shift+2
       kwin."Window to Desktop 20" = [ ];
       kwin."Window to Desktop 21" = [ ];
       kwin."Window to Desktop 22" = [ ];
       kwin."Window to Desktop 23" = [ ];
       kwin."Window to Desktop 24" = [ ];
       kwin."Window to Desktop 25" = [ ];
-      kwin."Window to Desktop 3" = [ "Meta+Shift+3"  ];
-      kwin."Window to Desktop 4" = [ "Meta+Shift+4"  ];
-      kwin."Window to Desktop 5" = [ "Meta+Shift+5"  ];
+      kwin."Window to Desktop 3" = [ "Meta+#" ];  # Meta+Shift+3
+      kwin."Window to Desktop 4" = [ "Meta+$" ];  # Meta+Shift+4
+      kwin."Window to Desktop 5" = [ "Meta+%" ];  # Meta+Shift+5
       kwin."Window to Desktop 6" = [ ];
       kwin."Window to Desktop 7" = [ ];
       kwin."Window to Desktop 8" = [ ];
@@ -206,9 +219,9 @@
       mediacontrol.playmedia = [ ];
       mediacontrol.playpausemedia = ["Media Play" "Alt+3"];
       mediacontrol.previousmedia = ["Media Previous" "Alt+1"];
-      mediacontrol.seekbackwardmedia = ["Alt+Shift+1" "Media Rewind"];
+      mediacontrol.seekbackwardmedia = ["Alt+!" "Media Rewind"];  # Alt+Shift+1
       mediacontrol.seekbackwardmedialong = [ ];
-      mediacontrol.seekforwardmedia = ["Media Fast Forward" "Alt+Shift+2"];
+      mediacontrol.seekforwardmedia = ["Media Fast Forward" "Alt+@"];  # Alt+Shift+2
       mediacontrol.seekforwardmedialong = [ ];
       mediacontrol.stopmedia = "Media Stop";
       org_kde_powerdevil."Decrease Keyboard Brightness" = "Keyboard Brightness Down";
