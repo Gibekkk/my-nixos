@@ -54,6 +54,7 @@ in
     # Desktop apps
     gnome-network-displays # Miracast; P2P/firewall setup in modules/nm.nix
     kdePackages.kamoso
+    opencode-desktop
 
     #alacritty
     mpv
@@ -73,7 +74,6 @@ in
     nodejs
     (python3.withPackages (ps: with ps; [ requests ]))
     opencode
-    opencode-desktop
     electron
 
     # CLI utils
