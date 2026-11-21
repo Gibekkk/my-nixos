@@ -256,11 +256,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1794206108,
-        "narHash": "sha256-7lFJa24qfSgx6YSu73SnolTFpLB4GQ3qZJwNx24z/z8=",
+        "lastModified": 1794888131,
+        "narHash": "sha256-eDXn2wSXK7zYx+6ZUBP2r2ovjsGzHxR3G7REq+ermQY=",
         "owner": "crmne",
         "repo": "zapfast",
-        "rev": "4497f08cee368235dedb4848990916bb40bfc88e",
+        "rev": "a6f0f624a4a82dbdc5b0b08e721794fbe943348a",
         "type": "github"
       },
       "original": {
