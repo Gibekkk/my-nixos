@@ -24,6 +24,6 @@ in
   #
   # Leave the in-app switches alone: to stop an app autostarting, remove it here.
   xdg.configFile =
-    mkAutostart "zapfast" "ZapFast" "${config.programs.zapfast.package}/bin/zapfast --start-hidden"
-#     // mkAutostart "vesktop" "Vesktop" "${config.programs.vesktop.package}/bin/vesktop";
+    mkAutostart "zapfast" "ZapFast" "${config.programs.zapfast.package}/bin/zapfast --start-hidden";
+#     mkAutostart "vesktop" "Vesktop" "${config.programs.vesktop.package}/bin/vesktop";
 }
