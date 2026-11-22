@@ -8,18 +8,15 @@
   "provider": {
     "ai5090lt5": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "ai 5090 lt5",
+      "name": "YOUR_SERVER_NAME",
       "options": {
-        "baseURL": "https://ai-chat.imtlt5ucm.dpdns.org/api",
+        "baseURL": "YOUR_LINK_HERE",
         "apiKey": "YOUR_KEY_HERE"
       },
       "models": {
         "qwen/qwen3.6-35b-a3b": {
           "name": "qwen3.6-35b-a3b"
         },
-        "qwen/qwen3.8-27b": {
-          "name": "qwen3.8-27b"
-        }
       }
     }
   }
