@@ -55,7 +55,6 @@ in
     gnome-network-displays # Miracast; P2P/firewall setup in modules/nm.nix
     kdePackages.kamoso
     opencode-desktop
-    virtualbox
 
     #alacritty
     mpv

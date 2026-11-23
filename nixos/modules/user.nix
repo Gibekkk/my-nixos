@@ -14,7 +14,7 @@
     users.gibets = {
       isNormalUser = true;
       description = "Guest";
-      extraGroups = [ "networkmanager" "input" "libvirtd" "video" "vboxusers"];
+      extraGroups = [ "networkmanager" "input" "libvirtd" "video" ];
       packages = with pkgs; [];
     };
   };
