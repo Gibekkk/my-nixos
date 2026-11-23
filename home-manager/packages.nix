@@ -14,7 +14,6 @@
     # zapfast: installed by programs.zapfast (modules/zapfast.nix)
     # github-desktop: installed system-wide (nixos/packages.nix, patched for sign-in)
     vesktop
-    virtualbox
     godot
     nur.repos.mio.futo-notes
     winbox
