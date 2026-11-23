@@ -78,6 +78,7 @@ in
 
     # CLI utils
     xsel
+    dhcpcd
     net-tools
     glib
     xclip
