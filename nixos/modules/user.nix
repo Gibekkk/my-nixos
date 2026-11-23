@@ -7,14 +7,14 @@
     users.gibekkk = {
       isNormalUser = true;
       description = "Gilbert Winardy";
-      extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" "video" ];
+      extraGroups = [ "networkmanager" "wheel" "input" "libvirtd" "video" "vboxusers"];
       packages = with pkgs; [];
     };
 
     users.gibets = {
       isNormalUser = true;
       description = "Guest";
-      extraGroups = [ "networkmanager" "input" "libvirtd" "video" ];
+      extraGroups = [ "networkmanager" "input" "libvirtd" "video" "vboxusers"];
       packages = with pkgs; [];
     };
   };
