@@ -1,6 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
+  # true:  video wallpaper, switched to the static image while the power
+  #        profile is "balanced" or "power-saver" (wallpaper-power-switch below)
+  # false: always the static image
+  liveWallpaper = true;
+
   pluginId = "luisbocanegra.smart.video.wallpaper.reborn";
 
   # Same approach as the widgets: fetch the plugin and install its QML package
@@ -37,12 +42,84 @@ let
   # The video lives in your repo, so it moves with the config
 #   video = ../../../../backgrounds/furina-under-dark-skies.1920x1080.mp4;
     video = ../../../../backgrounds/furina-night-sea-genshin-impact-moewalls-com.mp4;
+
+  # First frame of the video (ffmpeg -i <video> -frames:v 1 <png>), used as the
+  # static wallpaper
+  staticImage = ../../../../backgrounds/furina-night-sea-genshin-impact-moewalls-com.first-frame.png;
+
+  # Follows power-profiles-daemon: "performance" -> video wallpaper,
+  # "balanced" / "power-saver" -> static image. Switches through plasmashell's
+  # scripting API (the same call plasma-manager uses to set the wallpaper).
+  # The video plugin keeps its settings, so switching back resumes it.
+  wallpaperPowerSwitch = pkgs.writeShellApplication {
+    name = "wallpaper-power-switch";
+    runtimeInputs = with pkgs; [ systemd glib.bin coreutils gnused gnugrep ];
+    text = ''
+      setPlugin() {
+        busctl --user call org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell \
+          evaluateScript s "$1" >/dev/null
+      }
+
+      liveJs='var ds = desktops();
+      for (var i = 0; i < ds.length; i++) { ds[i].wallpaperPlugin = "${pluginId}"; }'
+
+      staticJs='var ds = desktops();
+      for (var i = 0; i < ds.length; i++) {
+        ds[i].wallpaperPlugin = "org.kde.image";
+        ds[i].currentConfigGroup = ["Wallpaper", "org.kde.image", "General"];
+        ds[i].writeConfig("Image", "file://${staticImage}");
+      }'
+
+      current=""
+      apply() {
+        profile=$(busctl --system get-property net.hadess.PowerProfiles /net/hadess/PowerProfiles \
+          net.hadess.PowerProfiles ActiveProfile 2>/dev/null | sed -E 's/^s "(.*)"$/\1/') || true
+        [ -n "$profile" ] || return 0
+        if [ "$profile" = performance ]; then want=live; else want=static; fi
+        [ "$want" = "$current" ] && return 0
+        if [ "$want" = live ]; then js="$liveJs"; else js="$staticJs"; fi
+        if setPlugin "$js"; then
+          current="$want"
+          echo "power profile '$profile': $want wallpaper"
+        fi
+      }
+
+      # wait for plasmashell, then give plasma-manager's login scripts a moment
+      for _ in $(seq 1 60); do
+        busctl --user status org.kde.plasmashell >/dev/null 2>&1 && break
+        sleep 1
+      done
+      sleep 5
+      apply
+
+      gdbus monitor --system --dest net.hadess.PowerProfiles --object-path /net/hadess/PowerProfiles \
+        | while read -r line; do
+            case "$line" in *ActiveProfile*) apply ;; esac
+          done
+    '';
+  };
 in
 {
   xdg.dataFile."plasma/wallpapers/${pluginId}".source =
     "${svwr}/share/plasma/wallpapers/${pluginId}";
 
-  programs.plasma.workspace.wallpaperCustomPlugin = {
+  programs.plasma.workspace.wallpaper = lib.mkIf (!liveWallpaper) staticImage;
+
+  systemd.user.services.wallpaper-power-switch = lib.mkIf liveWallpaper {
+    Unit = {
+      Description = "Static wallpaper on balanced/power-saver, video on performance";
+      After = [ "graphical-session.target" "plasma-plasmashell.service" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${wallpaperPowerSwitch}/bin/wallpaper-power-switch";
+      Restart = "always";
+      RestartSec = 5;
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
+
+  programs.plasma.workspace.wallpaperCustomPlugin = lib.mkIf liveWallpaper {
     plugin = pluginId;
     config.General = {
       PauseMode = 0;
