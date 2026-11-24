@@ -105,6 +105,11 @@ in
 
   programs.plasma.workspace.wallpaper = lib.mkIf (!liveWallpaper) staticImage;
 
+  # Lock screen: always the static frame. The login screen (SDDM) uses the
+  # same image, set in nixos/modules/plasma.nix.
+  # ("${...}" copies just the image to the store, not the whole repo)
+  programs.plasma.kscreenlocker.appearance.wallpaper = "${staticImage}";
+
   systemd.user.services.wallpaper-power-switch = lib.mkIf liveWallpaper {
     Unit = {
       Description = "Static wallpaper on balanced/power-saver, video on performance";

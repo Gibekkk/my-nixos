@@ -1,4 +1,10 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }:
+let
+  # Same image as the desktop's static wallpaper and the lock screen
+  # (home-manager/modules/wms/plasma/plasma-wallpaper.nix)
+  loginWallpaper = ../../backgrounds/furina-night-sea-genshin-impact-moewalls-com.first-frame.png;
+in
+{
   services.desktopManager.plasma6.enable = true;
 
   services.displayManager.sddm = {
@@ -6,6 +12,15 @@
     wayland.enable = true;
   };
   services.displayManager.defaultSession = "plasma";
+
+  # Login screen background. SDDM reads theme.conf.user next to the Breeze
+  # theme's theme.conf; it lands in /run/current-system/sw/share/sddm/themes/breeze.
+  environment.systemPackages = [
+    (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
+      [General]
+      background=${loginWallpaper}
+    '')
+  ];
 
   # --- Crash handling / self-recovery -------------------------------------
 
