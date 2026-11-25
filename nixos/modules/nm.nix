@@ -29,9 +29,9 @@
     })
   ];
 
-  # Miracast sink connects back to PC (RTSP)
+  # Miracast sink connects back to PC (RTSP). RDP/3389 is owned by modules/rdp.nix.
   networking.firewall = {
-    allowedTCPPorts = [ 7236 7250 3389 ]; # 3389: RDP
+    allowedTCPPorts = [ 7236 7250 ];
     allowedUDPPorts = [ 7236 5353 ];
   };
 }

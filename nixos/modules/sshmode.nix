@@ -9,7 +9,7 @@ let
       text = builtins.readFile ./scripts/${name}.sh;
     };
 
-  sshmode = mkScript "sshmode" (with pkgs; [ systemd coreutils gnugrep gawk iproute2 ]);
+  sshmode = mkScript "sshmode" (with pkgs; [ systemd coreutils util-linux gnugrep gawk iproute2 ]); # util-linux: runuser into the KRDP user service
   sshmode-gui = mkScript "sshmode-gui" [ pkgs.kdePackages.kdialog sshmode ];
 in
 {

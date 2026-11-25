@@ -1,16 +1,36 @@
 # sshmode: show or change how the SSH server is exposed.
 #
-#   off        SSH server stopped
-#   tailscale  SSH reachable only through the tailscale0 interface
-#   public     SSH reachable from every network
+#   off        SSH + RDP servers stopped
+#   tailscale  reachable only through the tailscale0 interface
+#   public     reachable from every network
 #
-# The mode is a runtime state (a systemd drop-in under /run), so every
+# The KRDP RDP server (systemd user service "krdpserver", services.rdp)
+# follows the same mode: it binds to tailscale0 in 'tailscale' and is
+# stopped in 'off'. Its runtime state lives in /run/rdpmode, so every
 # reboot returns to the default configured in Nix (services.sshmode.default).
 
 unit="sshd.socket"
 dropin_dir="/run/systemd/system/sshd.socket.d"
 dropin="$dropin_dir/10-sshmode.conf"
 ts_if="tailscale0"
+rdp_user="gibekkk"
+rdp_unit="krdpserver.service"
+
+# Update the KRDP server to match $1 (off|tailscale|public). Runs as root;
+# talks to the user's systemd instance if a session is up. Silent on failure:
+# RDP must never break an SSH mode switch (and vice versa).
+apply_rdp() {
+  local mode="$1" uid xdg
+  printf '%s\n' "$mode" > /run/rdpmode 2>/dev/null || true
+  uid=$(id -u "$rdp_user" 2>/dev/null) || return 0
+  xdg="/run/user/$uid"
+  [ -d "$xdg" ] || return 0   # no session running: nothing to (re)(un)start; launcher picks the mode up on next login
+  if [ "$mode" = "off" ]; then
+    runuser -u "$rdp_user" -- env XDG_RUNTIME_DIR="$xdg" systemctl --user stop "$rdp_unit" </dev/null >/dev/null 2>&1 || true
+  else
+    runuser -u "$rdp_user" -- env XDG_RUNTIME_DIR="$xdg" systemctl --user restart "$rdp_unit" </dev/null >/dev/null 2>&1 || true
+  fi
+}
 
 usage() {
   cat <<'USAGE'
@@ -69,7 +89,7 @@ show_status() {
   count=$(remote_sessions | wc -l)
 
   echo "SSH mode        : $mode"
-  echo "Default at boot : $default"
+  echo "RDP (KRDP) mode : $( { cat /run/rdpmode 2>/dev/null || true; } | head -n1 ), default at boot: $default"
   echo "Remote sessions : $count"
   echo "Listening on    :"
   if ! ss -H -tln 'sport = :22' | awk '{print "  " $4}' | grep .; then
@@ -100,6 +120,29 @@ set_mode() {
       rm -f "$dropin"
       systemctl daemon-reload
       drop_sessions
+      apply_rdp off
+      ;;
+    tailscale)
+      if ! ip link show "$ts_if" >/dev/null 2>&1; then
+        # fail closed: never leave SSH (or RDP) reachable when we could not restrict it
+        systemctl stop "$unit" || true
+        apply_rdp off
+        echo "sshmode: interface $ts_if not found (is tailscaled running?)." >&2
+        echo "sshmode: SSH and RDP have been switched OFF instead." >&2
+        exit 1
+      fi
+      mkdir -p "$dropin_dir"
+      printf '[Socket]\nBindToDevice=%s\n' "$ts_if" > "$dropin"
+      systemctl daemon-reload
+      systemctl restart "$unit"
+      apply_rdp tailscale
+      ;;
+    public)
+      mkdir -p "$dropin_dir"
+      printf '[Socket]\nBindToDevice=\n' "$dropin"
+      systemctl daemon-reload
+      systemctl restart "$unit"
+      apply_rdp public
       ;;
     tailscale)
       if ! ip link show "$ts_if" >/dev/null 2>&1; then
