@@ -139,29 +139,10 @@ set_mode() {
       ;;
     public)
       mkdir -p "$dropin_dir"
-      printf '[Socket]\nBindToDevice=\n' "$dropin"
-      systemctl daemon-reload
-      systemctl restart "$unit"
-      apply_rdp public
-      ;;
-    tailscale)
-      if ! ip link show "$ts_if" >/dev/null 2>&1; then
-        # fail closed: never leave SSH reachable when we could not restrict it
-        systemctl stop "$unit" || true
-        echo "sshmode: interface $ts_if not found (is tailscaled running?)." >&2
-        echo "sshmode: SSH has been switched OFF instead." >&2
-        exit 1
-      fi
-      mkdir -p "$dropin_dir"
-      printf '[Socket]\nBindToDevice=%s\n' "$ts_if" > "$dropin"
-      systemctl daemon-reload
-      systemctl restart "$unit"
-      ;;
-    public)
-      mkdir -p "$dropin_dir"
       printf '[Socket]\nBindToDevice=\n' > "$dropin"
       systemctl daemon-reload
       systemctl restart "$unit"
+      apply_rdp public
       ;;
     *)
       echo "sshmode: unknown mode '$mode'" >&2
