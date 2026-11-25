@@ -67,7 +67,6 @@ in
     kdePackages.kcalc
     ventoy-full-gtk
     impression
-    kdePackages.krdp
 
     # Coding
     gnumake

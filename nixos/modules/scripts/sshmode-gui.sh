@@ -14,7 +14,7 @@ choice=$(kdialog --title "SSH server mode" \
   --radiolist "Current mode: $current
 
 Choose how SSH and the RDP (KRDP) servers can be reached:" \
-  off "Off - SSH server disabled" "$(radio off)" \
+  off "Off - SSH and RDP disabled" "$(radio off)" \
   tailscale "Tailscale only (default)" "$(radio tailscale)" \
   public "Public - reachable from any network" "$(radio public)") || exit 0
 

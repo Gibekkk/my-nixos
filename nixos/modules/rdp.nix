@@ -3,38 +3,64 @@ let
   cfg = config.services.rdp;
 
   # KDE KRDP (invent.kde.org/plasma/krdp): an RDP server streaming the user's
-  # live Plasma session. Package + KCM already in environment.systemPackages
-  # (packages.nix); here we run "krdpserver" as a systemd *user* service whose
-  # exposure mirrors services.sshmode.default (off | tailscale | public) so it
-  # follows SSH on/off state, including the runtime `sshmode` toggle.
+  # live Plasma session. Its exposure mirrors sshmode (off | tailscale | public),
+  # including the runtime `sshmode` toggle.
+  #
+  # This overrides KRDP's own user unit (app-org.kde.krdpserver.service) instead
+  # of adding a second one, so System Settings > Remote Desktop and sshmode
+  # control the same server and never fight over the port. Logins use the
+  # system user (SystemUserEnabled=true in ~/.config/krdpserverrc, set in that
+  # settings page).
   krdp = pkgs.kdePackages.krdp;
+  unitName = "app-org.kde.krdpserver";
 
-  # Launcher: decides how/where to bind based on the current sshmode mode.
+  # Decides how/where to listen based on the current mode.
   # /run/rdpmode is written at runtime by scripts/sshmode.sh (per-boot state,
   # like the sshd.socket drop-in); at boot it falls back to /etc/sshmode/default.
+  #
+  # --plasma: capture the screen and inject input through KWin's own protocols
+  # (allowed by X-KDE-Wayland-Interfaces in org.kde.krdpserver.desktop) instead
+  # of the desktop portal, which needs an interactive approval and could not
+  # identify the server ("App info not found"), so nothing was streamed.
   krdp-launcher = pkgs.writeShellApplication {
     name = "krdp-launcher";
     runtimeInputs = [ pkgs.coreutils pkgs.iproute2 ];
     text = ''
       mode=""
-      [ -r /run/rdpmode ] && mode=$(cat /run/rdpmode)
-      if [ -z "$mode" ]; then
-        [ -r /etc/sshmode/default ] && mode=$(cat /etc/sshmode/default)
-      fi
+      if [ -r /run/rdpmode ]; then mode=$(cat /run/rdpmode); fi
+      if [ -z "$mode" ] && [ -r /etc/sshmode/default ]; then mode=$(cat /etc/sshmode/default); fi
+
+      run() { exec ${krdp}/bin/krdpserver --plasma --port ${toString cfg.port} "$@"; }
+
+      tailscale_ip() {
+        local line kind addr
+        line=$(ip -4 -o addr show dev tailscale0 2>/dev/null | head -n1) || return 0
+        # "<idx>: tailscale0    inet 100.x.y.z/32 ..." -> 100.x.y.z
+        read -r _ _ kind addr _ <<< "$line" || true
+        if [ "''${kind:-}" = inet ]; then printf '%s\n' "''${addr%%/*}"; fi
+      }
+
       case "$mode" in
         off)
-          exit 0   # fail closed: nothing listens while SSH is off
+          echo "krdp: sshmode is off; not starting."
+          exit 0
           ;;
         public)
-          exec ${krdp}/bin/krdpserver --port ${toString cfg.port}
+          run
           ;;
         tailscale)
-          ip_addr=$(ip -4 -o addr show dev tailscale0 2>/dev/null | head -n1 | awk '{print $4}' | cut -d/ -f1)
+          # tailscaled may still be coming up right after login: wait a bit
+          ip_addr=""
+          for _ in $(seq 1 30); do
+            ip_addr=$(tailscale_ip)
+            [ -n "$ip_addr" ] && break
+            sleep 2
+          done
           if [ -z "$ip_addr" ]; then
-            echo "krdp: mode 'tailscale' but tailscale0 has no address; not starting." >&2
-            exit 0
+            echo "krdp: tailscale0 has no IPv4 address; retrying later." >&2
+            exit 1   # Restart=on-failure tries again
           fi
-          exec ${krdp}/bin/krdpserver --address "$ip_addr" --port ${toString cfg.port}
+          run --address "$ip_addr"
           ;;
         *)
           echo "krdp: unknown mode '$mode'; refusing to start (fail closed)." >&2
@@ -44,16 +70,15 @@ let
     '';
   };
 in
-
 {
   options.services.rdp = {
     # On by default; set services.rdp.enable = false to remove the service.
-    enable = lib.mkEnableOption "KRDP, an RDP server whose exposure follows services.sshmode.default" // {
+    enable = lib.mkEnableOption "KRDP, an RDP server whose exposure follows sshmode" // {
       default = true;
     };
 
     port = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.port;
       default = 3389;
       description = "TCP port krdpserver listens on (opened in the firewall by this module).";
     };
@@ -66,23 +91,27 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Public mode needs the port through nftables; Tailscale-mode traffic
-    # already passes via networking.firewall.trustedInterfaces (tailscale0).
+    environment.systemPackages = [ krdp ];   # KCM (System Settings > Remote Desktop) + desktop file
+    systemd.packages = [ krdp ];             # ships app-org.kde.krdpserver.service
+
+    # Public mode needs the port open; Tailscale traffic already passes via
+    # networking.firewall.trustedInterfaces (tailscale0).
     networking.firewall.allowedTCPPorts = [ cfg.port ];
 
-    systemd.user.services.krdpserver = {
-      description = "KRDP server for the current Plasma session (RDP, TCP ${toString cfg.port})";
-      # Global user unit: limit it to cfg.user so a guest login cannot start a
-      # misconfigured instance (pattern from nixos services.video.wivrn).
-      unitConfig.ConditionUser = cfg.user;
-      # Session-scoped: starts when a graphical session is up, dies with it.
-      wantedBy = [ "graphical-session.target" ];
+    # Drop-in on the packaged unit (it exists in systemd.packages).
+    systemd.user.services.${unitName} = {
+      overrideStrategy = "asDropin";
+      # Global user unit: only for cfg.user, so a guest login never shares its session
+      unitConfig = {
+        ConditionUser = cfg.user;
+        StartLimitIntervalSec = 300;
+        StartLimitBurst = 5;
+      };
+      wantedBy = [ "plasma-workspace.target" ];
       serviceConfig = {
-        ExecStart = "${krdp-launcher}/bin/krdp-launcher";
-        # on-abnormal: recover from segfaults/timeouts, but do NOT respawn a
-        # clean config error (e.g. "no users configured" exits non-zero once at boot).
-        Restart = "on-abnormal";
-        RestartSec = 2;
+        ExecStart = [ "" "${krdp-launcher}/bin/krdp-launcher" ];
+        Restart = "on-failure";
+        RestartSec = 10;
       };
     };
   };

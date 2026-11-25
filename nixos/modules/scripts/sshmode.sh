@@ -4,17 +4,18 @@
 #   tailscale  reachable only through the tailscale0 interface
 #   public     reachable from every network
 #
-# The KRDP RDP server (systemd user service "krdpserver", services.rdp)
-# follows the same mode: it binds to tailscale0 in 'tailscale' and is
-# stopped in 'off'. Its runtime state lives in /run/rdpmode, so every
-# reboot returns to the default configured in Nix (services.sshmode.default).
+# The KRDP RDP server (user unit "app-org.kde.krdpserver.service", see
+# modules/rdp.nix) follows the same mode: it listens on the tailscale0
+# address in 'tailscale' and is stopped in 'off'. Its runtime state lives in
+# /run/rdpmode, so every reboot returns to the default configured in Nix
+# (services.sshmode.default).
 
 unit="sshd.socket"
 dropin_dir="/run/systemd/system/sshd.socket.d"
 dropin="$dropin_dir/10-sshmode.conf"
 ts_if="tailscale0"
 rdp_user="gibekkk"
-rdp_unit="krdpserver.service"
+rdp_unit="app-org.kde.krdpserver.service"
 
 # Update the KRDP server to match $1 (off|tailscale|public). Runs as root;
 # talks to the user's systemd instance if a session is up. Silent on failure:
