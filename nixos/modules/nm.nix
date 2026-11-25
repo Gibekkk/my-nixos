@@ -31,7 +31,7 @@
 
   # Miracast sink connects back to PC (RTSP)
   networking.firewall = {
-    allowedTCPPorts = [ 7236 7250 ];
+    allowedTCPPorts = [ 7236 7250 3389 ]; # 3389: RDP
     allowedUDPPorts = [ 7236 5353 ];
   };
 }

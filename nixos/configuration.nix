@@ -20,4 +20,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; # Enabling flakes
 
   system.stateVersion = "26.05"; # Don't change it bro
+
+  services.rdp.enable = true; # KRDP server on port 3389 (port opened in modules/nm.nix)
 }

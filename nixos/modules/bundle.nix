@@ -23,6 +23,7 @@
     ./xdg.nix
     ./plasma.nix
     ./scripts.nix
+    ./rdp.nix
     ./graphics.nix
     ./flatpak.nix
     ./steam.nix
