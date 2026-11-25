@@ -44,7 +44,28 @@
 
     let
       system = "x86_64-linux";
-      homeManagerConfig = home-manager.lib.homeManagerConfiguration {
+     in {
+
+    # Gibekkk - system hostname
+    nixosConfigurations.Gibekkk = nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        pkgs-unstable = import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
+        inherit inputs system;
+      };
+      modules = [
+        nix-flatpak.nixosModules.nix-flatpak
+        ./nixos/configuration.nix
+        nur.modules.nixos.default
+        # only for the guest (nixos/modules/guest-home.nix); gibekkk stays standalone below
+        home-manager.nixosModules.home-manager
+      ];
+    };
+
+    # gibekkk - username
+    homeConfigurations.gibekkk = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
       extraSpecialArgs = {
         pkgs-unstable = import nixpkgs-unstable {
@@ -60,28 +81,8 @@
       nur.modules.homeManager.default
       ];
     };
-    in {
 
-    # Gibekkk - system hostname
-    nixosConfigurations.Gibekkk = nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        pkgs-unstable = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
-        };
-        inherit inputs system;
-      };
-      modules = [
-        nix-flatpak.nixosModules.nix-flatpak
-        ./nixos/configuration.nix
-        nur.modules.nixos.default
-      ];
-    };
-
-    # gibekkk - username
-    homeConfigurations.gibekkk = homeManagerConfig;
-
-    # gibets - username
-    homeConfigurations.gibets = homeManagerConfig;
+    # gibets (guest) has no standalone config: its home is tmpfs and is rebuilt
+    # at every boot by the NixOS module in nixos/modules/guest-home.nix.
   };
 }

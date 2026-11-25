@@ -1,6 +1,7 @@
 {
   imports = [
     ./filesystem.nix
+    ./guest-home.nix # guest home-manager, re-applied every boot
     ./appimage.nix
     ./sshmode.nix
     ./mariadb.nix
