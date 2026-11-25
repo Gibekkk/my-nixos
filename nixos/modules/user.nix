@@ -14,6 +14,7 @@
     users.gibets = {
       isNormalUser = true;
       description = "Guest";
+      uid = 1001;   # fixed: the tmpfs home in filesystem.nix is owned by this uid
       extraGroups = [ "networkmanager" "input" "libvirtd" "video" ];
       packages = with pkgs; [];
     };
