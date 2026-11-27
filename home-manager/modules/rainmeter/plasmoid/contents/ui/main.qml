@@ -15,6 +15,42 @@ PlasmoidItem {
     // only the instance whose area contains the stats grid reads the stats
     readonly property bool needsStats: fullRepresentationItem ? fullRepresentationItem.showsDate : false
 
+    // ---- click-through
+    // The desktop wraps every widget in an applet container that takes all
+    // clicks inside its box (so it can be dragged in Edit Mode). The clock only
+    // draws, so disable input on that container: Qt then delivers clicks to
+    // whatever is below (desktop icons, the desktop's right-click menu).
+    // Side effect: the pieces cannot be dragged/resized in Edit Mode (the
+    // layout comes from rainmeter.nix anyway). If a future Plasma names the
+    // container differently, nothing is disabled and the clock still works.
+    property int clickThroughTries: 0
+    Timer {
+        id: clickThroughTimer
+        interval: 500
+        repeat: true
+        running: true
+        onTriggered: {
+            root.clickThroughTries++
+            let item = root.parent
+            const chain = []
+            while (item) {
+                const name = String(item)
+                chain.push(name.split("(")[0])
+                if (/AppletContainer|ItemContainer/.test(name)) {
+                    item.enabled = false
+                    console.log("rainmeter: click-through enabled on", name.split("(")[0])
+                    running = false
+                    return
+                }
+                item = item.parent
+            }
+            if (root.clickThroughTries >= 20) {     // give up after 10 s
+                console.warn("rainmeter: no applet container found, clicks stay on the widget; chain:", chain.join(" > "))
+                running = false
+            }
+        }
+    }
+
     property date now: new Date()
     Timer {
         interval: 1000
