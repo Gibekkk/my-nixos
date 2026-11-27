@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 let
   conf = builtins.readFile ./conky.conf;
 
@@ -68,7 +68,9 @@ let
     '';
   };
 in
-{
+# Only active when custom.desktopClock = "conky" (option defined in
+# modules/rainmeter/rainmeter.nix; set in home.nix).
+lib.mkIf (config.custom.desktopClock == "conky") {
   services.conky = {
     enable = true;
     package = conkyClickThrough;

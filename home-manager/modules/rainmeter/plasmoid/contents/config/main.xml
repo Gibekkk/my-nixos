@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Per-instance settings, written by rainmeter.nix (plasma-manager desktop widgets) -->
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name=""/>
+  <group name="General">
+    <!-- which part to show: date | clock | ring -->
+    <entry name="block" type="String">
+      <default>date</default>
+    </entry>
+    <!-- top-left corner of this widget in the 1920x1080 design space -->
+    <entry name="originX" type="Double">
+      <default>0</default>
+    </entry>
+    <entry name="originY" type="Double">
+      <default>0</default>
+    </entry>
+    <!-- screen width / 1920 -->
+    <entry name="scale" type="Double">
+      <default>1</default>
+    </entry>
+  </group>
+</kcfg>

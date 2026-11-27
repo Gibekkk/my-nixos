@@ -15,6 +15,7 @@
     ./firefox.nix
     ./spicetify.nix
     ./conky/conky.nix
+    ./rainmeter/rainmeter.nix   # desktop clock widget; pick conky/rainmeter in home.nix
     ./dolphin.nix
     ./node.nix
     #./qt.nix

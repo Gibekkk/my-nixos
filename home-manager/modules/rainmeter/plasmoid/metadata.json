@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Gibekkk"
+            }
+        ],
+        "Category": "Date and Time",
+        "Description": "Date, clock and system stats, redrawn from the conky clock",
+        "Icon": "preferences-system-time",
+        "Id": "org.gibekkk.rainmeter",
+        "License": "GPL-3.0-or-later",
+        "Name": "Rainmeter Clock",
+        "Version": "1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}
