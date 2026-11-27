@@ -24,7 +24,7 @@ let
     { block = "date";  x = 64;   y = 40; w = 380; h = 690; }  # weekday, day, month, year, stats
     { block = "clock"; x = 1570; y = 40; w = 290; h = 460; }  # hour, minutes, AM/PM
   ] ++ lib.optionals cfg.ring [
-    { block = "ring"; x = 395;  y = 0; w = 275; h = 880; }    # ring arc left of her face
+    { block = "ring"; x = 395;  y = 70; w = 155; h = 560; }   # ring arc left of her face
     { block = "ring"; x = 1275; y = 0; w = 300; h = 220; }    # short arc top right
   ];
 

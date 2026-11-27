@@ -304,7 +304,7 @@ Item {
                 ctx.reset()
                 ctx.translate(-x, -y)
                 const cx = 1010, cy = 450, r = 600, soft = 14, baseAlpha = 0.40
-                const arcs = [[150, 232], [298, 322]]
+                const arcs = [[179, 203], [298, 322]]   // both 24 deg long
                 const mod = (v, m) => ((v % m) + m) % m             // floored modulo, like Lua's %
                 const circDist = (a, b) => Math.abs(mod(a - b + 180, 360) - 180)
                 ctx.lineWidth = 1.5

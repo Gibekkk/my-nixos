@@ -41,7 +41,8 @@ local RIGHT = {
 -- ring around the girl (unchanged from clock.lua)
 local RING = {
   cx = 1010, cy = 450, r = 600, width = 1.5, alpha = 0.40, soft = 14,
-  arcs = { { from = 150, to = 232 }, { from = 298, to = 322 } },
+  -- both arcs 24 deg long (the left one used to be 150-232)
+  arcs = { { from = 179, to = 203 }, { from = 298, to = 322 } },
 }
 
 ------------------------------------------------------------------ helpers
