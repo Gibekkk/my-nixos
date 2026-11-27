@@ -246,7 +246,19 @@ local function draw_stat(cr, label, value, x, y, color)
 end
 
 ------------------------------------------------------------------ main
+-- While this file exists, draw nothing (the window stays fully transparent).
+-- conky-editmode (conky.nix) creates it during Plasma's Edit Mode, so conky
+-- is hidden without being stopped and restarted.
+local HIDE_FLAG = (os.getenv('XDG_RUNTIME_DIR') or '/tmp') .. '/conky-hidden'
+
+local function hidden()
+  local f = io.open(HIDE_FLAG, 'r')
+  if f then f:close(); return true end
+  return false
+end
+
 function conky_main()
+  if hidden() then return end
   local surface = conky_surface()
   if not surface then return end
   local cr = cairo_create(surface)

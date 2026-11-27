@@ -43,21 +43,24 @@ let
 
   # Hide conky while Plasma's Edit Mode is on (it would still be drawn over
   # the shrunken desktop), show it again when Edit Mode ends.
+  # Hides instead of stopping: stopping/restarting recreated the full-screen
+  # surface and made the desktop lag. clock.lua draws nothing while the flag
+  # file exists (shows up within one update_interval).
   # plasmashell has an editMode D-Bus property but sends no change signal
   # (tested), so poll it once a second; one busctl call is negligible.
   conkyEditMode = pkgs.writeShellApplication {
     name = "conky-editmode";
     runtimeInputs = with pkgs; [ systemd coreutils ];
     text = ''
+      flag="''${XDG_RUNTIME_DIR:-/tmp}/conky-hidden"
+      rm -f "$flag"
+      trap 'rm -f "$flag"' EXIT
       last=""
       while true; do
         mode=$(busctl --user get-property org.kde.plasmashell /PlasmaShell \
           org.kde.PlasmaShell editMode 2>/dev/null || true)
         if [ "$mode" != "$last" ]; then
-          case "$mode" in
-            "b true")  systemctl --user stop conky.service ;;
-            "b false") if [ "$last" = "b true" ]; then systemctl --user start conky.service; fi ;;
-          esac
+          if [ "$mode" = "b true" ]; then touch "$flag"; else rm -f "$flag"; fi
           last="$mode"
         fi
         sleep 1
