@@ -2,14 +2,15 @@ import QtQuick
 import QtQuick.Shapes
 
 // The clock from conky's clock.lua, redrawn in QML with the same numbers.
-// Everything is laid out in clock.lua's 1920x1080 design space; one instance
-// shows one block ("date", "clock" or "ring"), cropped to the area that
-// starts at (originX, originY) in design space and scaled by sceneScale.
+// Everything is laid out in clock.lua's 1920x1080 design space. Each widget
+// instance shows the part of that whole scene (date, clock, ring) that falls
+// inside its own area, which starts at (originX, originY) in design space and
+// is scaled by sceneScale; parts outside it are not even loaded.
 // Pure QtQuick (no Plasma imports), so it can also be rendered off-screen.
 Item {
     id: scene
 
-    property string block: "date"
+    property bool showRing: true
     property real originX: 0
     property real originY: 0
     property real sceneScale: 1
@@ -156,10 +157,18 @@ Item {
             Scale { xScale: scene.sceneScale; yScale: scene.sceneScale }
         ]
 
-        Loader { anchors.fill: parent; active: scene.block === "date";  sourceComponent: dateBlock }
-        Loader { anchors.fill: parent; active: scene.block === "clock"; sourceComponent: clockBlock }
-        Loader { anchors.fill: parent; active: scene.block === "ring";  sourceComponent: ringBlock }
+        Loader { anchors.fill: parent; active: scene.showsDate;  sourceComponent: dateBlock }
+        Loader { anchors.fill: parent; active: scene.showsClock; sourceComponent: clockBlock }
+        Loader { anchors.fill: parent; active: scene.showRing;   sourceComponent: ringBlock }
     }
+
+    // This instance's area in design space, and which blocks fall inside it
+    readonly property rect view: Qt.rect(originX, originY, width / sceneScale, height / sceneScale)
+    function overlaps(x1, y1, x2, y2) {
+        return view.x < x2 && view.x + view.width > x1 && view.y < y2 && view.y + view.height > y1
+    }
+    readonly property bool showsDate:  overlaps(64, 40, 440, 730)     // weekday ... stats grid
+    readonly property bool showsClock: overlaps(1520, 40, 1870, 500)  // hour, minutes, AM/PM + rule
 
     // Metrics shared by the date and clock blocks
     TextMetrics { id: zero17; font.family: "Poppins"; font.weight: Font.Light; font.pixelSize: 17; text: "0" }
@@ -289,7 +298,8 @@ Item {
     }
 
     // ---------------------------------------------------------------- ring around the girl
-    // Only this instance's area is painted (the full ring is far bigger).
+    // Only this instance's area is painted (the full ring is far bigger);
+    // where the arcs miss the area, nothing is drawn.
     Component {
         id: ringBlock
         Canvas {

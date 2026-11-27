@@ -5,14 +5,15 @@ import org.kde.plasma.plasma5support as P5Support
 
 // Rainmeter Clock: Plasma desktop widget version of the conky clock.
 // Drawing lives in Scene.qml; this file feeds it the time, the stats and the
-// per-instance settings (block, origin, scale) written by rainmeter.nix.
+// per-instance settings (origin, scale, ring) written by rainmeter.nix.
 PlasmoidItem {
     id: root
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     preferredRepresentation: fullRepresentation
 
-    readonly property string block: Plasmoid.configuration.block
+    // only the instance whose area contains the stats grid reads the stats
+    readonly property bool needsStats: fullRepresentationItem ? fullRepresentationItem.showsDate : false
 
     property date now: new Date()
     Timer {
@@ -52,7 +53,7 @@ PlasmoidItem {
 
     Timer {
         interval: 2000                       // conky's update_interval
-        running: root.block === "date"
+        running: root.needsStats
         repeat: true
         triggeredOnStart: true
         onTriggered: statsSource.connectSource(root.statsCommand)
@@ -110,7 +111,7 @@ PlasmoidItem {
     }
 
     fullRepresentation: Scene {
-        block: root.block
+        showRing: Plasmoid.configuration.ring
         originX: Plasmoid.configuration.originX
         originY: Plasmoid.configuration.originY
         sceneScale: Plasmoid.configuration.scale

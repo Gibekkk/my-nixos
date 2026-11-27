@@ -5,9 +5,9 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
   <kcfgfile name=""/>
   <group name="General">
-    <!-- which part to show: date | clock | ring -->
-    <entry name="block" type="String">
-      <default>date</default>
+    <!-- draw the ring around the wallpaper's girl -->
+    <entry name="ring" type="Bool">
+      <default>true</default>
     </entry>
     <!-- top-left corner of this widget in the 1920x1080 design space -->
     <entry name="originX" type="Double">

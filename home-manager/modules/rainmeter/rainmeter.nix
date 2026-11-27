@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.custom.rainmeter;
+  enabled = config.custom.desktopClock == "rainmeter";
   pluginId = "org.gibekkk.rainmeter";
 
   # Reads the same /proc and /sys files as conky's clock.lua (see stats.sh)
@@ -17,31 +18,82 @@ let
       --replace-fail '@STATS@' '${stats}/bin/rainmeter-stats'
   '';
 
-  # The clock is laid out in clock.lua's 1920x1080 design space. It is placed
-  # as several small widgets, each showing one block, so the desktop (icons,
-  # right-click menu) stays usable everywhere else. Boxes are in design pixels.
+  # The clock is laid out in clock.lua's 1920x1080 design space and placed as
+  # two widgets; each draws whatever part of the scene falls in its own area,
+  # so the rest of the desktop (icons, right-click menu) stays usable.
+  # Plasma's desktop keeps widgets on a 16 px grid and moves overlapping ones
+  # when it reloads, so these boxes must stay non-overlapping and on the grid
+  # (boxes in design pixels):
   pieces = [
-    { block = "date";  x = 64;   y = 40; w = 380; h = 690; }  # weekday, day, month, year, stats
-    { block = "clock"; x = 1570; y = 40; w = 290; h = 460; }  # hour, minutes, AM/PM
-  ] ++ lib.optionals cfg.ring [
-    { block = "ring"; x = 395;  y = 70; w = 155; h = 560; }   # ring arc left of her face
-    { block = "ring"; x = 1275; y = 0; w = 300; h = 220; }    # short arc top right
+    { x = 64;   y = 32; w = 512; h = 704; }   # date, month, year, stats + left ring arc
+    { x = 1264; y = 0;  w = 608; h = 496; }   # hour, minutes, AM/PM + right ring arc
   ];
 
   scale = cfg.screenWidth / 1920.0;
-  px = v: builtins.floor (v * scale + 0.5);
+  grid = v: 16 * builtins.floor (v * scale / 16 + 0.5);   # scaled, snapped to the grid
 
-  mkWidget = p: {
-    name = pluginId;
-    position = { horizontal = px p.x; vertical = px p.y; };
-    size = { width = px p.w; height = px p.h; };
-    config.General = {
-      inherit (p) block;
-      originX = p.x;
-      originY = p.y;
-      inherit scale;
-    };
-  };
+  # Desktop geometry (screen pixels) and widget settings of each piece
+  placed = map (p: rec {
+    x = grid p.x;
+    y = grid p.y;
+    w = grid p.w;
+    h = grid p.h;
+    # where the widget really sits, back in design space, so the drawing
+    # stays aligned with the wallpaper even after snapping
+    originX = x / scale;
+    originY = y / scale;
+  }) pieces;
+
+  wantedJson = builtins.toJSON (if enabled then placed else [ ]);
+
+  # Plasma desktop scripts (plasmashell's evaluateScript). Kept free of single
+  # quotes: they are passed to qdbus in single quotes below.
+  #
+  # check: prints "ok" when the desktop already holds exactly the wanted
+  # pieces at their geometry, otherwise "fix"
+  checkJs = ''
+    var want = ${wantedJson};
+    var ok = true;
+    desktops().forEach(function (d) {
+      var ws = d.widgets();
+      var mine = ws.filter(function (w) { return w.type == "${pluginId}"; });
+      var others = ws.length - mine.length;
+      if (mine.length != want.length || (${lib.boolToString enabled} && others > 0)) { ok = false; return; }
+      want.forEach(function (p) {
+        var hit = mine.some(function (w) {
+          var g = w.geometry;
+          return Math.abs(g.x - p.x) < 2 && Math.abs(g.y - p.y) < 2 &&
+                 Math.abs(g.width - p.w) < 2 && Math.abs(g.height - p.h) < 2;
+        });
+        if (!hit) ok = false;
+      });
+    });
+    print(ok ? "ok" : "fix");
+  '';
+
+  # remove: in rainmeter mode every desktop widget (the layout is fully
+  # declarative); otherwise only the clock pieces
+  removeJs = ''
+    desktops().forEach(function (d) {
+      d.widgets().forEach(function (w) {
+        if (${lib.boolToString enabled} || w.type == "${pluginId}") w.remove();
+      });
+    });
+  '';
+
+  addJs = ''
+    var want = ${wantedJson};
+    desktops().forEach(function (d) {
+      want.forEach(function (p) {
+        var w = d.addWidget("${pluginId}", p.x, p.y, p.w, p.h);
+        w.currentConfigGroup = ["General"];
+        w.writeConfig("originX", p.originX);
+        w.writeConfig("originY", p.originY);
+        w.writeConfig("scale", ${toString scale});
+        w.writeConfig("ring", ${lib.boolToString cfg.ring});
+      });
+    });
+  '';
 in
 {
   options.custom = {
@@ -70,21 +122,33 @@ in
     };
   };
 
-  config = lib.mkMerge [
+  config = {
     # Always installed, so it can also be added by hand from "Add Widgets"
-    {
-      xdg.dataFile."plasma/plasmoids/${pluginId}".source = plasmoid;
-    }
+    xdg.dataFile."plasma/plasmoids/${pluginId}".source = plasmoid;
 
-    # plasma-manager replaces ALL desktop widgets with this list whenever it
-    # changes (widgets added by hand on the desktop are removed then).
-    (lib.mkIf (config.custom.desktopClock == "rainmeter") {
-      programs.plasma.desktop.widgets = map mkWidget pieces;
-    })
-
-    # Switching away: clear the desktop widgets so the clock pieces go away
-    (lib.mkIf (config.custom.desktopClock != "rainmeter") {
-      programs.plasma.desktop.widgets = [ ];
-    })
-  ];
+    # Fully declarative layout, checked at every login (runAlways).
+    # Plasma 6 ignores geometry changes from scripts, and removing a widget
+    # finishes a moment later (removing and re-adding in one go let the new
+    # pieces get squeezed next to the dying ones). So:
+    #   - already exactly right: do nothing (the normal case; Plasma restores
+    #     the pieces itself since they are on the grid and do not overlap)
+    #   - otherwise: remove, wait for the removal to finish, then add.
+    # This never leaves duplicates. In rainmeter mode, widgets added by hand on
+    # the desktop are removed at the next login; in conky/none mode only the
+    # clock pieces are removed.
+    programs.plasma.startup.startupScript."rainmeter_layout" = {
+      runAlways = true;
+      priority = 4;
+      text = ''
+        qd() { qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "$1"; }
+        state=$(qd '${checkJs}')
+        if [ "$state" != ok ]; then
+          echo "rainmeter: (re)placing the desktop clock widgets"
+          qd '${removeJs}'
+          sleep 3
+          qd '${addJs}'
+        fi
+      '';
+    };
+  };
 }
